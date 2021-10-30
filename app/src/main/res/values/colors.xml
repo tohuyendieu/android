@@ -6,6 +6,9 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="gray">#9E9E9E</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="important_button_color">#de2454</color>
     <color name="primary_color">#573ba3</color>
+    <color name="sub_primary_color">#4F2FA5</color>
 </resources>
