@@ -1,4 +1,4 @@
-package fptu.ninhtbm.thebookshop.ui.home;
+package fptu.ninhtbm.thebookshop.ui.cart;
 
 import androidx.appcompat.app.AppCompatActivity;
 

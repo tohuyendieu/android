@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">The Bookshop</string>
     <string name="text_search_hint">Search cái gì đó đi</string>
+    <string name="txt_label_total">Total:</string>
+    <string name="txt_button_checkout">Check out</string>
+    <string name="txt_label_total_price">0</string>
+    <string name="txt_label_email_address">Email Address</string>
+    <string name="txt_label_billing_address">Billing Address</string>
+    <string name="txt_label_warning_address">Please ensure that your address is correct, it can\'t be changed once your order is submitted.</string>
+    <string name="txt_btn_confirm_checkout">Confirm</string>
+    <string name="txt_label_full_name">Full Name</string>
+    <string name="txt_label_phone">Phone</string>
 </resources>
