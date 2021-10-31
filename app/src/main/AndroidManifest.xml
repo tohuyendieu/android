@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fptu.ninhtbm.thebookshop">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -10,10 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheBookshop">
         <activity
+            android:name=".ui.FirestoreActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.base.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
