@@ -12,4 +12,5 @@
     <color name="primary_color">#573ba3</color>
     <color name="sub_primary_color">#4F2FA5</color>
     <color name="btn_checkout_color">#de2454</color>
+    <color name="bg_warning">#FFEEE6</color>
 </resources>
