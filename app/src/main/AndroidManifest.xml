@@ -14,11 +14,16 @@
             android:name=".ui.FirestoreActivity"
             android:exported="true" />
         <activity
+            android:name=".ui.checkout.CheckoutActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.cart.CartActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.base.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

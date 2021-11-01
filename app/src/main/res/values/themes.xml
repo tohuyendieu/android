@@ -17,4 +17,14 @@
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
+    <style name="Header1">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="CornerButtonRed16">
+        <item name="backgroundTint">@color/important_button_color</item>
+        <item name="cornerRadius">50dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>
