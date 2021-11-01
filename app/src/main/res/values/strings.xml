@@ -1,6 +1,20 @@
 <resources>
     <string name="app_name">The Bookshop</string>
     <string name="text_search_hint">Search cái gì đó đi</string>
+    <string name="text_account">Tài khoản</string>
+    <string name="text_password">Mật khẩu</string>
+    <string name="text_repassword">Xác nhận lại mật khẩu</string>
+    <string name="text_forgot_password">Quên mật khẩu?</string>
+    <string name="text_login">Đăng nhập</string>
+    <string name="text_sign_up">Đăng ký tài khoản</string>
+    <string name="text_copy_right">FPTU IS1416 @lazy-neko\ncopyright © 2021</string>
+    <string name="txt_account_info">Thông tin tài khoản</string>
+    <string name="text_lastname">Họ và tên đệm</string>
+    <string name="text_firstname">Tên</string>
+    <string name="text_email">Email</string>
+    <string name="text_phone">Số điện thoại</string>
+    <string name="text_agree_policy">Tôi đồng ý với các điều khoản sử dụng dịch vụ</string>
+    <string name="text_double_back_exit">Chạm lần nữa để thoát</string>
     <string name="txt_label_total">Total:</string>
     <string name="txt_button_checkout">Check out</string>
     <string name="txt_label_total_price">0</string>
@@ -10,4 +24,6 @@
     <string name="txt_btn_confirm_checkout">Confirm</string>
     <string name="txt_label_full_name">Full Name</string>
     <string name="txt_label_phone">Phone</string>
+    <string name="text_user_info">Thông tin cá nhân</string>
+    <string name="text_change_password">Đổi mật khẩu</string>
 </resources>
