@@ -1,4 +1,4 @@
-package fptu.ninhtbm.thebookshop.ui.models;
+package fptu.ninhtbm.thebookshop.models;
 
 public class OrderStatus {
     private String id;
@@ -28,4 +28,11 @@ public class OrderStatus {
         this.status = status;
     };
 
+    @Override
+    public String toString() {
+        return "OrderStatus{" +
+                "id='" + id + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

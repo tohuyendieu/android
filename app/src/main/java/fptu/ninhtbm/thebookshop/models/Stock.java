@@ -1,4 +1,4 @@
-package fptu.ninhtbm.thebookshop.ui.models;
+package fptu.ninhtbm.thebookshop.models;
 
 import com.google.firebase.Timestamp;
 
@@ -40,4 +40,12 @@ public class Stock {
         this.updatedDate = updatedDate;
     };
 
+    @Override
+    public String toString() {
+        return "Stock{" +
+                "id='" + id + '\'' +
+                ", quantity=" + quantity +
+                ", updatedDate=" + updatedDate +
+                '}';
+    }
 }

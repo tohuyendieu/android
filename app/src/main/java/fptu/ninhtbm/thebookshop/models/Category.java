@@ -1,4 +1,4 @@
-package fptu.ninhtbm.thebookshop.ui.models;
+package fptu.ninhtbm.thebookshop.models;
 
 import com.google.firebase.Timestamp;
 
@@ -40,4 +40,12 @@ public class Category {
         this.createdAt = createdAt;
     };
 
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

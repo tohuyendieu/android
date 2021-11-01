@@ -1,4 +1,4 @@
-package fptu.ninhtbm.thebookshop.ui.models;
+package fptu.ninhtbm.thebookshop.models;
 
 public class AuthorBook {
     private String authorID;
@@ -28,4 +28,11 @@ public class AuthorBook {
         this.bookID = bookID;
     };
 
+    @Override
+    public String toString() {
+        return "AuthorBook{" +
+                "authorID='" + authorID + '\'' +
+                ", bookID='" + bookID + '\'' +
+                '}';
+    }
 }

@@ -1,4 +1,4 @@
-package fptu.ninhtbm.thebookshop.ui.models;
+package fptu.ninhtbm.thebookshop.models;
 
 import com.google.firebase.Timestamp;
 
@@ -60,4 +60,14 @@ public class Comment {
         this.createdAt = createdAt;
     };
 
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id='" + id + '\'' +
+                ", bookID=" + bookID +
+                ", customerID=" + customerID +
+                ", rate=" + rate +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

@@ -1,4 +1,4 @@
-package fptu.ninhtbm.thebookshop.ui.models;
+package fptu.ninhtbm.thebookshop.models;
 
 import com.google.firebase.Timestamp;
 
@@ -160,4 +160,24 @@ public class Book {
         this.createdAt = createdAt;
     };
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id='" + id + '\'' +
+                ", publisherID=" + publisherID +
+                ", stockID=" + stockID +
+                ", categoryID=" + categoryID +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", discount=" + discount +
+                ", totalPage=" + totalPage +
+                ", bookCoverImg='" + bookCoverImg + '\'' +
+                ", description='" + description + '\'' +
+                ", totalRating=" + totalRating +
+                ", totalRatingStar=" + totalRatingStar +
+                ", totalBookSelled=" + totalBookSelled +
+                ", avgRated=" + avgRated +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

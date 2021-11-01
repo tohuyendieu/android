@@ -1,4 +1,4 @@
-package fptu.ninhtbm.thebookshop.ui.models;
+package fptu.ninhtbm.thebookshop.models;
 
 import com.google.firebase.Timestamp;
 
@@ -22,6 +22,14 @@ public class Customer {
         this.mail = mail;
         this.phone = phone;
         this.createdAt = createdAt;
+    }
+
+    public Customer(Object accountID, String name, String address, String mail, String phone) {
+        this.accountID = accountID;
+        this.name = name;
+        this.address = address;
+        this.mail = mail;
+        this.phone = phone;
     }
 
     public String getId() {
@@ -80,4 +88,16 @@ public class Customer {
         this.createdAt = createdAt;
     };
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id='" + id + '\'' +
+                ", accountID=" + accountID +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", mail='" + mail + '\'' +
+                ", phone='" + phone + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

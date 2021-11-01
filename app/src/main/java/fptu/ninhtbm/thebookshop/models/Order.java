@@ -1,4 +1,4 @@
-package fptu.ninhtbm.thebookshop.ui.models;
+package fptu.ninhtbm.thebookshop.models;
 
 import com.google.firebase.Timestamp;
 
@@ -90,4 +90,17 @@ public class Order {
         this.buyerAddress = buyerAddress;
     };
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id='" + id + '\'' +
+                ", customerID=" + customerID +
+                ", orderStatusID=" + orderStatusID +
+                ", orderDate=" + orderDate +
+                ", totalAmount=" + totalAmount +
+                ", buyerFullname='" + buyerFullname + '\'' +
+                ", buyerPhone='" + buyerPhone + '\'' +
+                ", buyerAddress='" + buyerAddress + '\'' +
+                '}';
+    }
 }

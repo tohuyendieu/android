@@ -1,4 +1,4 @@
-package fptu.ninhtbm.thebookshop.ui.models;
+package fptu.ninhtbm.thebookshop.models;
 
 public class OrderItem {
     private String id;
@@ -68,4 +68,15 @@ public class OrderItem {
         this.discount = discount;
     };
 
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "id='" + id + '\'' +
+                ", bookID=" + bookID +
+                ", orderID=" + orderID +
+                ", quantity=" + quantity +
+                ", sellPrice=" + sellPrice +
+                ", discount=" + discount +
+                '}';
+    }
 }
