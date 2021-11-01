@@ -20,6 +20,13 @@ public class BookSelected {
         this.createdAt = createdAt;
     }
 
+    public BookSelected(Object bookID, Object cartID, int quantity, Timestamp createdAt) {
+        this.bookID = bookID;
+        this.cartID = cartID;
+        this.quantity = quantity;
+        this.createdAt = createdAt;
+    }
+
     public String getId() {
         return id;
     };

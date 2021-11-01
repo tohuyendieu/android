@@ -32,6 +32,13 @@ public class Customer {
         this.phone = phone;
     }
 
+    public Customer(String name, String address, String mail, String phone) {
+        this.name = name;
+        this.address = address;
+        this.mail = mail;
+        this.phone = phone;
+    }
+
     public String getId() {
         return id;
     };

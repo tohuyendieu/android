@@ -20,6 +20,11 @@ public class Account {
         this.createdAt = createdAt;
     }
 
+    public Account(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getId() {
         return id;
     }
