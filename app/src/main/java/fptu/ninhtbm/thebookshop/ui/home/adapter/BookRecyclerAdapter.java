@@ -38,10 +38,10 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (mBookList == null || mBookList.get(position) == null)
             return;
-        Book book = mBookList.get(position);
-        Glide.with(mContext)
-                .load(book.getSource())
-                .into(holder.imgBook);
+//        Book book = mBookList.get(position);
+//        Glide.with(mContext)
+////                .load(book.getSource())
+//                .into(holder.imgBook);
     }
 
     @Override

@@ -71,7 +71,9 @@ public class FirestoreActivity extends AppCompatActivity {
 
 //        addAccountAndCustomerInfo(new Account("King123", "123456"), new Customer("King Wisdom", "Hòa Lạc",  "kingwisdom.dev@gmail.com", "0337220922"));  // Rounting 8
 
-         updatePassword("FeuU4tA9sjd5eCQkn8UF", "123456", "account12");  // Rounting 10
+//        getCustomerInfoByLogin("account13", "account13");  // Rounting 7
+
+//        updatePassword("FeuU4tA9sjd5eCQkn8UF", "123456", "account12");  // Rounting 10
 
     }
 
@@ -178,12 +180,10 @@ public class FirestoreActivity extends AppCompatActivity {
                                         account.setId(document.getId());
                                         customer.setAccountID(account);
 
-                                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                        Log.d(TAG, "Thông tin người dùng: " + customer.toString());
                                     } else {
-                                        Log.d(TAG, "No such document");
+                                        Log.d(TAG, "Không tìm thấy thông tin người dùng!");
                                     }
-
-                                    Log.d(TAG, "Current data: " + customer.toString());
                                 } else {
                                     Log.d(TAG, "get failed with ", task.getException());
                                 }
@@ -334,6 +334,109 @@ public class FirestoreActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
+    // ====================================> Rounting 7:  Login <==========================================
+    // Login Account with username + password and return Customer Info
+    private void getCustomerInfoByLogin (String username, String password) {
+        db.collection("Account")
+                .whereEqualTo("username", username)
+                .whereEqualTo("password", password)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            QuerySnapshot accountDocs = task.getResult();
+                            if(accountDocs.getDocuments().size() > 0) {
+                                Account account = accountDocs.getDocuments().get(0).toObject(Account.class);
+                                if(account.isStatus() == false) {
+                                    Log.d(TAG, "Tài khoản đang bị khóa, vui lòng liên hệ với Admin để tiếp tục truy cập");
+                                } else {
+                                    account.setId(accountDocs.getDocuments().get(0).getId());
+                                    Log.d(TAG, account.toString());
+                                    db.collection("Customer")
+                                            .whereEqualTo("accountID", db.collection("Account").document(account.getId()))
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    if(task.isSuccessful()) {
+                                                        QuerySnapshot documents = task.getResult();
+                                                        if (documents.getDocuments().size() > 0) {
+                                                            Customer customer = documents.getDocuments().get(0).toObject(Customer.class);
+                                                            customer.setId(documents.getDocuments().get(0).getId());
+                                                            customer.setAccountID(account);
+
+                                                            Log.d(TAG, "Đăng nhập thành công!");
+                                                            Log.d(TAG, customer.toString());
+                                                        } else {
+                                                            Log.d(TAG, "Không tìm thấy thông tin Customer!");
+                                                        }
+                                                    } else {
+                                                        Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                                                    }
+                                                }
+                                            });
+                                }
+                            } else {
+                                Log.d(TAG, "Tên tài khoản hoặc mật khẩu sai!");
+                            }
+                        } else {
+                            Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                        }
+                    }
+                });
+//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                        if (queryDocumentSnapshots.getDocuments().size() > 0) {
+//                            Account account = queryDocumentSnapshots.getDocuments().get(0).toObject(Account.class);
+//                            if(account.isStatus() == false) {
+//                                Log.d(TAG, "Tài khoản đang bị khóa, vui lòng liên hệ với Admin để tiếp tục truy cập");
+//                            } else {
+//                                account.setId(queryDocumentSnapshots.getDocuments().get(0).getId());
+//                                Log.d(TAG, account.toString());
+//                                db.collection("Customer")
+//                                        .whereEqualTo("accountID", db.collection("Account").document(account.getId()))
+//                                        .get()
+//                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                                            @Override
+//                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                                if(task.isSuccessful()) {
+//                                                    QuerySnapshot documents = task.getResult();
+//                                                    if (documents.getDocuments().size() > 0) {
+//                                                        Customer customer = documents.getDocuments().get(0).toObject(Customer.class);
+//                                                    customer.setId(documents.getDocuments().get(0).getId());
+//                                                    customer.setAccountID(account);
+//
+//                                                    Log.d(TAG, "Đăng nhập thành công!");
+//                                                    Log.d(TAG, customer.toString());
+//                                                    } else {
+//                                                        Log.d(TAG, "Không tìm thấy thông tin Customer!");
+//                                                    }
+//                                                } else {
+//                                                    Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+//                                                }
+//                                            }
+//                                        });
+//                            }
+//
+//                        } else {
+//                            Log.d(TAG, "Tên tài khoản hoặc mật khẩu sai!");
+//                        }
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.d(TAG, "Có lỗi xảy ra "+ e.toString());
+//                    }
+//                });
+    }
+
+
+    // ====================================> End Rounting 7:  End Login <==========================================
 
 
     // ====================================> Rounting 8:  Sign Up <==========================================
