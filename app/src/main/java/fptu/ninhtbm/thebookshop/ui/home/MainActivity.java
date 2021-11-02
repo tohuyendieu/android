@@ -1,9 +1,11 @@
 package fptu.ninhtbm.thebookshop.ui.home;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +20,8 @@ import java.util.List;
 
 import fptu.ninhtbm.thebookshop.R;
 import fptu.ninhtbm.thebookshop.model.Book;
+import fptu.ninhtbm.thebookshop.ui.account.AccountActivity;
+import fptu.ninhtbm.thebookshop.ui.cart.CartActivity;
 import fptu.ninhtbm.thebookshop.ui.home.adapter.BookRecyclerAdapter;
 import fptu.ninhtbm.thebookshop.ui.home.adapter.SliderBannerAdapter;
 
@@ -35,11 +39,14 @@ public class MainActivity extends AppCompatActivity {
     private BookRecyclerAdapter mBestSaleBookAdapter;
     private List<Book> mBookList;
 
+    private long pressedTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+        setListener();
         onLoadData();
     }
 
@@ -82,19 +89,41 @@ public class MainActivity extends AppCompatActivity {
         mBestSaleBookRecyclerView.setAdapter(mBestSaleBookAdapter);
     }
 
+    private void setListener() {
+        mBtnProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AccountActivity.class);
+            startActivity(intent);
+        });
+        mBtnCart.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CartActivity.class);
+            startActivity(intent);
+        });
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     private void onLoadData() {
         // Todo: fake number badge in cart
         badgeDrawable.setNumber(9);
-        // Todo: fake banner image
-        mImageList.add("https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200-1.png");
-        mImageList.add("https://qphs.fs.quoracdn.net/main-qimg-8e203d34a6a56345f86f1a92570557ba.webp");
-        mImageList.add("https://bizzbucket.co/wp-content/uploads/2020/08/Life-in-The-Metro-Blog-Title-22.png");
+        mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/154/original/ABCH_Fall21_2048x600_Ad.jpg");
+        mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/156/original/The_Dawn_Of_Everything_-_Bookshop_-_2048x600.jpg");
+        mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/154/original/ABCH_Fall21_2048x600_Ad.jpg`");
         mSliderBannerAdapter.notifyDataSetChanged();
         // todo: fake book data
         mBookList.add(new Book(1, "ngu", "https://images-us.bookshop.org/ingram/9781538730225.jpg"));
         mBookList.add(new Book(1, "ngu", "https://images-us.bookshop.org/ingram/9781538730225.jpg"));
         mBookList.add(new Book(1, "ngu", "https://images-us.bookshop.org/ingram/9781538730225.jpg"));
         mBestSaleBookAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finish();
+        } else {
+            Toast.makeText(getBaseContext(), getString(R.string.text_double_back_exit), Toast.LENGTH_SHORT).show();
+        }
+        pressedTime = System.currentTimeMillis();
+
     }
 }
