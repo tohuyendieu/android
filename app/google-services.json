@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "344044998707",
+    "project_id": "bookstore-sem7",
+    "storage_bucket": "bookstore-sem7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344044998707:android:61c21bc504de59ee645346",
+        "android_client_info": {
+          "package_name": "fptu.ninhtbm.thebookshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344044998707-t5p53h676iilpufmtl0h7i595bi29nba.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fptu.ninhtbm.thebookshop",
+            "certificate_hash": "e1e52a31eaad83abe7360ac0b3bacfc1bd6db241"
+          }
+        },
+        {
+          "client_id": "344044998707-u420j0fiakv3be5klcma6t65glsr5ct1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcnw85puuKVyN5F3QmFXybsTcLu571tWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344044998707-u420j0fiakv3be5klcma6t65glsr5ct1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
