@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query.Direction;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Transaction;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,6 +36,7 @@ import fptu.ninhtbm.thebookshop.model.Account;
 import fptu.ninhtbm.thebookshop.model.Book;
 import fptu.ninhtbm.thebookshop.model.BookSelected;
 import fptu.ninhtbm.thebookshop.model.Category;
+import fptu.ninhtbm.thebookshop.model.Comment;
 import fptu.ninhtbm.thebookshop.model.Customer;
 import fptu.ninhtbm.thebookshop.model.Publisher;
 import fptu.ninhtbm.thebookshop.model.Stock;
@@ -67,7 +69,13 @@ public class FirestoreActivity extends AppCompatActivity {
 
 //         getBookByID("0oRxIqalaGZGgWl6H4Ld"); // Rounting 3
 
+//         addComment(new Comment(db.collection("Book").document("6jx04F0EkJp4APEanHau"), db.collection("Customer").document("4yMOdgrzNcdLU2quUk7A"), 2, new Timestamp(new Date()))); // Rounting 3
+//        updateBookRated("0oRxIqalaGZGgWl6H4Ld" , 5);
+//        updateComment("dUAauOA7orbWTiqtPI9Q", 3); // Rounting 3
+
 //        addBookSelected(new BookSelected(db.collection("Book").document("123"), db.collection("Cart").document("234"), 1, new Timestamp(new Date())));
+
+//        getAllBookByCategoryID("zna5C9ZCKki5V8L97LZn");  // Rounting 5
 
 //        addAccountAndCustomerInfo(new Account("King123", "123456"), new Customer("King Wisdom", "Hòa Lạc",  "kingwisdom.dev@gmail.com", "0337220922"));  // Rounting 8
 
@@ -335,6 +343,152 @@ public class FirestoreActivity extends AppCompatActivity {
                 });
     }
 
+    // Add rating doc autogenerate ID with converter
+    private void addComment (Comment comment) {
+        String bookID = ((DocumentReference)comment.getBookID()).getId();
+        String customerID = ((DocumentReference)comment.getCustomerID()).getId();
+        db.collection("Comment")
+                .whereEqualTo("bookID", db.collection("Book").document(bookID))
+                .whereEqualTo("customerID", db.collection("Customer").document(customerID))
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            QuerySnapshot commentDocs = task.getResult();
+                            if(commentDocs.getDocuments().size() <= 0) {
+                                Map<String, Object> commentAdd = new HashMap<>();
+                                commentAdd.put("bookID", comment.getBookID());
+                                commentAdd.put("customerID", comment.getCustomerID());
+                                commentAdd.put("rate", comment.getRate());
+                                commentAdd.put("createdAt", comment.getCreatedAt());
+
+                                db.collection("Comment")
+                                        .add(commentAdd)
+                                        .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                if (task.isSuccessful()){
+                                                    Log.d(TAG, "Thêm đánh giá thành công! ID: " + task.getResult().getId());
+                                                } else {
+                                                    Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                                                }
+                                            }
+                                        });
+                            } else {
+                                Log.d(TAG, "Customer đã đánh giá cho cuốn sách này");
+                            }
+                        } else {
+                            Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                        }
+                    }
+                });
+    }
+
+    // Update totalRating, totalRatingStar and avgRated for Book item has bookID
+    private void updateBookRated (String bookID, int ratedStar) {
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentReference bookDocRef = db.collection("Book").document(bookID);
+                DocumentSnapshot bookSnapshot = transaction.get(bookDocRef);
+
+                long prevTotalRating = (bookSnapshot.getLong("totalRating") != null) ? bookSnapshot.getLong("totalRating") : 0;
+                long prevTotalRatingStar = (bookSnapshot.getLong("totalRatingStar") != null) ? bookSnapshot.getLong("totalRatingStar") : 0;
+                long newTotalRating = prevTotalRating + 1;
+                long newTotalRatingStar = prevTotalRatingStar + ratedStar;
+                transaction.update(bookDocRef, "totalRating", newTotalRating, "totalRatingStar", newTotalRatingStar, "avgRated", (double)newTotalRatingStar / newTotalRating );
+                Log.d(TAG, "Updated Rated for Book with BookID: " + bookID);
+
+                // Success
+                return null;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Transaction update book rating successfully committed!");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Transaction update book rating failed: ", e);
+            }
+        });
+    }
+
+    // Update Comment and update totalRatingStar, avgRated of Book
+    private void updateComment (String commentID, int newRatedStar) {
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentReference commentDocRef = db.collection("Comment").document(commentID);
+                DocumentSnapshot commentSnapshot = transaction.get(commentDocRef);
+
+                DocumentReference bookDocRef = (DocumentReference)commentSnapshot.getData().get("bookID");
+                DocumentSnapshot bookSnapshot = transaction.get(bookDocRef);
+
+                long prevTotalRating = (bookSnapshot.getLong("totalRating") != null) ? bookSnapshot.getLong("totalRating") : 0;
+                long prevTotalRatingStar = (bookSnapshot.getLong("totalRatingStar") != null) ? bookSnapshot.getLong("totalRatingStar") : 0;
+                long prevRatedStar = (commentSnapshot.getLong("rate") != null) ? commentSnapshot.getLong("rate") : 0;
+                long newTotalRatingStar = prevTotalRatingStar + (newRatedStar - prevRatedStar);
+
+                // Update new rate for comment
+                transaction.update(commentDocRef, "rate", newRatedStar);
+                Log.d(TAG, "Updated Rate for Comment with CommentID: " + commentDocRef.getId());
+
+                // Update Rated in Book
+                transaction.update(bookDocRef, "totalRatingStar", newTotalRatingStar, "avgRated", (double)newTotalRatingStar / prevTotalRating );
+                Log.d(TAG, "Updated Rated for Book with BookID: " + bookDocRef.getId());
+                // Success
+                return null;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Transaction update comment successfully committed!");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Transaction update comment failed: ", e);
+            }
+        });
+    }
+
+
+    // ====================================> Rounting 5:  Book Categories <==========================================
+    // Get all Book with CategoryID with converter
+    private void getAllBookByCategoryID (String categoryID) {
+        db.collection("Book")
+                .whereEqualTo("categoryID", db.collection("Category").document(categoryID))
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            QuerySnapshot docs = task.getResult();
+                            if(docs.getDocuments().size() > 0) {
+                                List<Book> bookList = new ArrayList<>();
+                                for (int i = 0; i < docs.getDocuments().size(); i++) {
+                                    Book book = docs.getDocuments().get(i).toObject(Book.class);
+                                    book.setId(docs.getDocuments().get(i).getId());
+                                    bookList.add(book);
+                                }
+
+                                logListData(bookList);
+                            } else {
+                                Log.d(TAG, "Không tìm thấy thông tin sách tương ứng");
+                            }
+                        } else {
+                            Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                        }
+                    }
+                });
+    }
+
+
+    // ====================================> End Rounting 5:  Book Categories <==========================================
+
 
     // ====================================> Rounting 7:  Login <==========================================
     // Login Account with username + password and return Customer Info
@@ -370,6 +524,7 @@ public class FirestoreActivity extends AppCompatActivity {
 
                                                             Log.d(TAG, "Đăng nhập thành công!");
                                                             Log.d(TAG, customer.toString());
+                                                            Log.d(TAG, "Ussername: " + ((Account)customer.getAccountID()).getUsername());
                                                         } else {
                                                             Log.d(TAG, "Không tìm thấy thông tin Customer!");
                                                         }
@@ -387,54 +542,7 @@ public class FirestoreActivity extends AppCompatActivity {
                         }
                     }
                 });
-//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                        if (queryDocumentSnapshots.getDocuments().size() > 0) {
-//                            Account account = queryDocumentSnapshots.getDocuments().get(0).toObject(Account.class);
-//                            if(account.isStatus() == false) {
-//                                Log.d(TAG, "Tài khoản đang bị khóa, vui lòng liên hệ với Admin để tiếp tục truy cập");
-//                            } else {
-//                                account.setId(queryDocumentSnapshots.getDocuments().get(0).getId());
-//                                Log.d(TAG, account.toString());
-//                                db.collection("Customer")
-//                                        .whereEqualTo("accountID", db.collection("Account").document(account.getId()))
-//                                        .get()
-//                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                                            @Override
-//                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                                if(task.isSuccessful()) {
-//                                                    QuerySnapshot documents = task.getResult();
-//                                                    if (documents.getDocuments().size() > 0) {
-//                                                        Customer customer = documents.getDocuments().get(0).toObject(Customer.class);
-//                                                    customer.setId(documents.getDocuments().get(0).getId());
-//                                                    customer.setAccountID(account);
-//
-//                                                    Log.d(TAG, "Đăng nhập thành công!");
-//                                                    Log.d(TAG, customer.toString());
-//                                                    } else {
-//                                                        Log.d(TAG, "Không tìm thấy thông tin Customer!");
-//                                                    }
-//                                                } else {
-//                                                    Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
-//                                                }
-//                                            }
-//                                        });
-//                            }
-//
-//                        } else {
-//                            Log.d(TAG, "Tên tài khoản hoặc mật khẩu sai!");
-//                        }
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.d(TAG, "Có lỗi xảy ra "+ e.toString());
-//                    }
-//                });
     }
-
 
     // ====================================> End Rounting 7:  End Login <==========================================
 
