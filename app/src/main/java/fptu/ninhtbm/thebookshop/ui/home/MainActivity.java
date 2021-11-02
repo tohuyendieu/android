@@ -109,10 +109,10 @@ public class MainActivity extends AppCompatActivity {
         mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/154/original/ABCH_Fall21_2048x600_Ad.jpg`");
         mSliderBannerAdapter.notifyDataSetChanged();
         // todo: fake book data
-        mBookList.add(new Book(1, "ngu", "https://images-us.bookshop.org/ingram/9781538730225.jpg"));
-        mBookList.add(new Book(1, "ngu", "https://images-us.bookshop.org/ingram/9781538730225.jpg"));
-        mBookList.add(new Book(1, "ngu", "https://images-us.bookshop.org/ingram/9781538730225.jpg"));
-        mBestSaleBookAdapter.notifyDataSetChanged();
+//        mBookList.add(new Book(1, "ngu", "https://images-us.bookshop.org/ingram/9781538730225.jpg"));
+//        mBookList.add(new Book(1, "ngu", "https://images-us.bookshop.org/ingram/9781538730225.jpg"));
+//        mBookList.add(new Book(1, "ngu", "https://images-us.bookshop.org/ingram/9781538730225.jpg"));
+//        mBestSaleBookAdapter.notifyDataSetChanged();
     }
 
     @Override
