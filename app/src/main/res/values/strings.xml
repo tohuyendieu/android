@@ -9,6 +9,7 @@
     <string name="text_sign_up">Đăng ký tài khoản</string>
     <string name="text_copy_right">FPTU IS1416 @lazy-neko\ncopyright © 2021</string>
     <string name="txt_account_info">Thông tin tài khoản</string>
+    <string name="txt_changing_account_info">Sửa thông tin tài khoản</string>
     <string name="text_lastname">Họ và tên đệm</string>
     <string name="text_firstname">Tên</string>
     <string name="text_email">Email</string>
@@ -29,4 +30,5 @@
     <string name="text_logout">Đăng xuất</string>
     <string name="text_about_app">Thông tin ứng dụng</string>
     <string name="text_history_order">Lịch sử đặt hàng</string>
+    <string name="text_noti_save_account_info_success">Sửa đổi thông tin cá nhân hoàn tất</string>
 </resources>

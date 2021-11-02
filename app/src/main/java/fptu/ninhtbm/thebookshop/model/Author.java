@@ -1,18 +1,20 @@
-package fptu.ninhtbm.thebookshop.models;
+package fptu.ninhtbm.thebookshop.model;
 
 import com.google.firebase.Timestamp;
 
-public class Category {
+public class Author {
     private String id;
-    private String title;
+    private String name;
+    private Timestamp dob;
     private Timestamp createdAt;
 
-    public Category() {
+    public Author() {
     }
 
-    public Category(String id, String title, Timestamp createdAt) {
+    public Author(String id, String name, Timestamp dob, Timestamp createdAt) {
         this.id = id;
-        this.title = title;
+        this.name = name;
+        this.dob = dob;
         this.createdAt = createdAt;
     }
 
@@ -24,12 +26,20 @@ public class Category {
         this.id = id;
     };
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     };
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
+    };
+
+    public Timestamp getDob() {
+        return dob;
+    };
+
+    public void setDob(Timestamp dob) {
+        this.dob = dob;
     };
 
     public Timestamp getCreatedAt() {
@@ -42,9 +52,10 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category{" +
+        return "Author{" +
                 "id='" + id + '\'' +
-                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
+                ", dob=" + dob +
                 ", createdAt=" + createdAt +
                 '}';
     }

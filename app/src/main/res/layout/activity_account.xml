@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient_primary"
@@ -40,18 +41,40 @@
 
         <ImageButton
             android:id="@+id/img_account"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_baseline_account_circle_40"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
+
+        <EditText
+            android:id="@+id/edt_name"
+            style="@style/Header1OnPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/img_account"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Trịnh Bá Minh Ninh" />
+
+        <EditText
+            android:id="@+id/edt_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/edt_name"
+            app:layout_constraintTop_toBottomOf="@id/edt_name"
+            tools:text="0987654321" />
+
         <TextView
-            android:id="@+id/txt_name"
+            android:id="@+id/text_name"
             style="@style/Header1OnPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,23 +84,22 @@
             tools:text="Trịnh Bá Minh Ninh" />
 
         <TextView
-            android:id="@+id/txt_phone"
+            android:id="@+id/text_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/txt_name"
-            app:layout_constraintTop_toBottomOf="@id/txt_name"
+            app:layout_constraintStart_toStartOf="@+id/text_name"
+            app:layout_constraintTop_toBottomOf="@id/text_name"
             tools:text="0987654321" />
 
         <ImageButton
-            android:id="@+id/btn_exit"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:id="@+id/btn_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_round_edit_32"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />

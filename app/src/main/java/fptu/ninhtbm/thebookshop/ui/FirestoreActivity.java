@@ -31,13 +31,13 @@ import java.util.List;
 import java.util.Map;
 
 import fptu.ninhtbm.thebookshop.R;
-import fptu.ninhtbm.thebookshop.models.Account;
-import fptu.ninhtbm.thebookshop.models.Book;
-import fptu.ninhtbm.thebookshop.models.BookSelected;
-import fptu.ninhtbm.thebookshop.models.Category;
-import fptu.ninhtbm.thebookshop.models.Customer;
-import fptu.ninhtbm.thebookshop.models.Publisher;
-import fptu.ninhtbm.thebookshop.models.Stock;
+import fptu.ninhtbm.thebookshop.model.Account;
+import fptu.ninhtbm.thebookshop.model.Book;
+import fptu.ninhtbm.thebookshop.model.BookSelected;
+import fptu.ninhtbm.thebookshop.model.Category;
+import fptu.ninhtbm.thebookshop.model.Customer;
+import fptu.ninhtbm.thebookshop.model.Publisher;
+import fptu.ninhtbm.thebookshop.model.Stock;
 
 public class FirestoreActivity extends AppCompatActivity {
     FirebaseFirestore db;

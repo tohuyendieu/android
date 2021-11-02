@@ -1,4 +1,4 @@
-package fptu.ninhtbm.thebookshop.models;
+package fptu.ninhtbm.thebookshop.model;
 
 import com.google.firebase.Timestamp;
 

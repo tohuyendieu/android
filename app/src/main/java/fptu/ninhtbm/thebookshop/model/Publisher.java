@@ -1,42 +1,25 @@
-package fptu.ninhtbm.thebookshop.models;
+package fptu.ninhtbm.thebookshop.model;
 
 import com.google.firebase.Timestamp;
 
-public class Customer {
+public class Publisher {
     private String id;
-    private Object accountID;
     private String name;
     private String address;
-    private String mail;
     private String phone;
+    private String mail;
     private Timestamp createdAt;
 
-    public Customer() {
+    public Publisher() {
     }
 
-    public Customer(String id, Object accountID, String name, String address, String mail, String phone, Timestamp createdAt) {
+    public Publisher(String id, String name, String address, String phone, String mail, Timestamp createdAt) {
         this.id = id;
-        this.accountID = accountID;
         this.name = name;
         this.address = address;
-        this.mail = mail;
         this.phone = phone;
+        this.mail = mail;
         this.createdAt = createdAt;
-    }
-
-    public Customer(Object accountID, String name, String address, String mail, String phone) {
-        this.accountID = accountID;
-        this.name = name;
-        this.address = address;
-        this.mail = mail;
-        this.phone = phone;
-    }
-
-    public Customer(String name, String address, String mail, String phone) {
-        this.name = name;
-        this.address = address;
-        this.mail = mail;
-        this.phone = phone;
     }
 
     public String getId() {
@@ -45,14 +28,6 @@ public class Customer {
 
     public void setId(String id) {
         this.id = id;
-    };
-
-    public Object getAccountID() {
-        return accountID;
-    };
-
-    public void setAccountID(Object accountID) {
-        this.accountID = accountID;
     };
 
     public String getName() {
@@ -71,20 +46,20 @@ public class Customer {
         this.address = address;
     };
 
-    public String getMail() {
-        return mail;
-    };
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    };
-
     public String getPhone() {
         return phone;
     };
 
     public void setPhone(String phone) {
         this.phone = phone;
+    };
+
+    public String getMail() {
+        return mail;
+    };
+
+    public void setMail(String mail) {
+        this.mail = mail;
     };
 
     public Timestamp getCreatedAt() {
@@ -97,13 +72,12 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "Publisher{" +
                 "id='" + id + '\'' +
-                ", accountID=" + accountID +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", mail='" + mail + '\'' +
                 ", phone='" + phone + '\'' +
+                ", mail='" + mail + '\'' +
                 ", createdAt=" + createdAt +
                 '}';
     }

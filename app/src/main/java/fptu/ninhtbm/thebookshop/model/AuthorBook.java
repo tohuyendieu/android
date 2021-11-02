@@ -1,4 +1,4 @@
-package fptu.ninhtbm.thebookshop.models;
+package fptu.ninhtbm.thebookshop.model;
 
 public class AuthorBook {
     private String authorID;

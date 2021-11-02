@@ -1,22 +1,18 @@
-package fptu.ninhtbm.thebookshop.models;
+package fptu.ninhtbm.thebookshop.model;
 
 import com.google.firebase.Timestamp;
 
-public class Comment {
+public class Cart {
     private String id;
-    private Object bookID;
     private Object customerID;
-    private int rate;
     private Timestamp createdAt;
 
-    public Comment() {
+    public Cart() {
     }
 
-    public Comment(String id, Object bookID, Object customerID, int rate, Timestamp createdAt) {
+    public Cart(String id, Object customerID, Timestamp createdAt) {
         this.id = id;
-        this.bookID = bookID;
         this.customerID = customerID;
-        this.rate = rate;
         this.createdAt = createdAt;
     }
 
@@ -28,28 +24,12 @@ public class Comment {
         this.id = id;
     };
 
-    public Object getBookID() {
-        return bookID;
-    };
-
-    public void setBookID(Object bookID) {
-        this.bookID = bookID;
-    };
-
     public Object getCustomerID() {
         return customerID;
     };
 
     public void setCustomerID(Object customerID) {
         this.customerID = customerID;
-    };
-
-    public int getRate() {
-        return rate;
-    };
-
-    public void setRate(int rate) {
-        this.rate = rate;
     };
 
     public Timestamp getCreatedAt() {
@@ -62,11 +42,9 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "Cart{" +
                 "id='" + id + '\'' +
-                ", bookID=" + bookID +
                 ", customerID=" + customerID +
-                ", rate=" + rate +
                 ", createdAt=" + createdAt +
                 '}';
     }
