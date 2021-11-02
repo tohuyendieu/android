@@ -21,6 +21,7 @@ import java.util.List;
 import fptu.ninhtbm.thebookshop.R;
 import fptu.ninhtbm.thebookshop.model.Book;
 import fptu.ninhtbm.thebookshop.ui.account.AccountActivity;
+import fptu.ninhtbm.thebookshop.ui.cart.CartActivity;
 import fptu.ninhtbm.thebookshop.ui.home.adapter.BookRecyclerAdapter;
 import fptu.ninhtbm.thebookshop.ui.home.adapter.SliderBannerAdapter;
 
@@ -94,8 +95,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         mBtnCart.setOnClickListener(v -> {
-//            Intent intent = new Intent(this, CartActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(this, CartActivity.class);
+            startActivity(intent);
         });
     }
 

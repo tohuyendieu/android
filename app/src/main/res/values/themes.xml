@@ -22,6 +22,10 @@
         <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="LabelBlack24">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
     <style name="Header1OnPrimary">
         <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/white</item>
@@ -31,6 +35,12 @@
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/primary_color</item>
+    </style>
+    <style name="Header2OnPrimary">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
     </style>
     <style name="TextItemMenu" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textSize">20sp</item>
