@@ -26,4 +26,7 @@
     <string name="txt_label_phone">Phone</string>
     <string name="text_user_info">Thông tin cá nhân</string>
     <string name="text_change_password">Đổi mật khẩu</string>
+    <string name="text_logout">Đăng xuất</string>
+    <string name="text_about_app">Thông tin ứng dụng</string>
+    <string name="text_history_order">Lịch sử đặt hàng</string>
 </resources>

@@ -1,20 +1,20 @@
 package fptu.ninhtbm.thebookshop.ui.account;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import fptu.ninhtbm.thebookshop.R;
 
 public class AccountActivity extends AppCompatActivity {
 
-//    private ImageButton btnBack;
-//    private ImageButton btnOption;
-//    private TextView textLabel;
+    private ImageButton btnExit;
+    private TextView btnViewDetailInformation;
+    private TextView btnChangePassword;
+    private TextView btnLogout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,17 +22,16 @@ public class AccountActivity extends AppCompatActivity {
         initViews();
         setListener();
     }
+
     private void initViews() {
-//        btnBack = findViewById(R.id.btn_back);
-//        btnOption = findViewById(R.id.btn_option);
-//        btnOption.setVisibility(View.VISIBLE);
-//        textLabel = findViewById(R.id.text_label);
-//        textLabel.setText(getString(R.string.txt_account_info));
+        btnExit = findViewById(R.id.btn_exit);
+        btnViewDetailInformation = findViewById(R.id.btn_view_detail_information);
+        btnChangePassword = findViewById(R.id.btn_change_password);
+        btnLogout = findViewById(R.id.btn_logout);
     }
 
     private void setListener() {
-//        btnBack.setOnClickListener(v -> finish());
-//        btnOption.setOnClickListener( v -> Toast.makeText(this, "Edit account", Toast.LENGTH_SHORT).show());
+        btnExit.setOnClickListener(v -> finish());
     }
 
 }
