@@ -47,4 +47,9 @@
     <string name="text_option_sale">Bán chạy</string>
     <string name="text_option_price">Giá</string>
     <string name="text_view_more_book">Xem thêm sách</string>
+    <string name="txt_best_sale">Sách bán chạy</string>
+    <string name="txt_top_new">Sách mới nhất</string>
+    <string name="txt_top_rate">Sách được đánh giá cao</string>
+    <string name="txt_top_sale_off">Sách HOT - giảm sốc</string>
+    <string name="txt_vew_all_book">xem tất cả sách</string>
 </resources>
