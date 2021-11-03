@@ -20,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.Query.Direction;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -35,6 +36,7 @@ import fptu.ninhtbm.thebookshop.R;
 import fptu.ninhtbm.thebookshop.model.Account;
 import fptu.ninhtbm.thebookshop.model.Book;
 import fptu.ninhtbm.thebookshop.model.BookSelected;
+import fptu.ninhtbm.thebookshop.model.Cart;
 import fptu.ninhtbm.thebookshop.model.Category;
 import fptu.ninhtbm.thebookshop.model.Comment;
 import fptu.ninhtbm.thebookshop.model.Customer;
@@ -54,7 +56,6 @@ public class FirestoreActivity extends AppCompatActivity {
     }
 
     public void onTestFirestore(View view) {
-//        Toast.makeText(this, "work", Toast.LENGTH_SHORT).show();
 //        testFirestore();
 
         // SOME METHOD TO CALL FIRESTORE WITH EACH ROUTING
@@ -72,9 +73,11 @@ public class FirestoreActivity extends AppCompatActivity {
 //         addComment(new Comment(db.collection("Book").document("6jx04F0EkJp4APEanHau"), db.collection("Customer").document("4yMOdgrzNcdLU2quUk7A"), 2, new Timestamp(new Date()))); // Rounting 3
 //        updateBookRated("0oRxIqalaGZGgWl6H4Ld" , 5);
 //        updateComment("dUAauOA7orbWTiqtPI9Q", 3); // Rounting 3
-
+//        getCommentedInBook("0oRxIqalaGZGgWl6H4Ld" ,"4yMOdgrzNcdLU2quUk7A");   //Rounting 3
 //        addBookSelected(new BookSelected(db.collection("Book").document("123"), db.collection("Cart").document("234"), 1, new Timestamp(new Date())));
+//        addBookToCart("AnBBxrKJHzceljqhhTtr", "5b1RnyIOPla1RvNw4cip");
 
+        getAllBookSelectedByCustomerID("AnBBxrKJHzceljqhhTtr");
 //        getAllBookByCategoryID("zna5C9ZCKki5V8L97LZn");  // Rounting 5
 
 //        addAccountAndCustomerInfo(new Account("King123", "123456"), new Customer("King Wisdom", "Hòa Lạc",  "kingwisdom.dev@gmail.com", "0337220922"));  // Rounting 8
@@ -296,51 +299,111 @@ public class FirestoreActivity extends AppCompatActivity {
     private void addBookToCart (String customerID, String bookID) {
         // If in Cart exist record of customerID else create new Cart record, then add to BookSelected with bookID, cartID, quantity
         // If Book already exist in BookSelected then update quantity of this book
-        // Create a new user with a first and last name
-        Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
+        db.collection("Cart")
+            .whereEqualTo("customerID", db.collection("Customer").document(customerID))
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful()){
+                        QuerySnapshot cartDocs = task.getResult();
+                        if(cartDocs.getDocuments().size() > 0) {
+                            Cart cart = cartDocs.getDocuments().get(0).toObject(Cart.class);
+                            cart.setId(cartDocs.getDocuments().get(0).getId());
+                            Log.d(TAG, "Đã tồn tại Cart with ID: " + cart.getId());
 
-        // Add a new document with a generated ID
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            db.collection("BookSelected")
+                                    .whereEqualTo("cartID", db.collection("Cart").document(cart.getId()))
+                                    .whereEqualTo("bookID", db.collection("Book").document(bookID))
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if(task.isSuccessful()) {
+                                                QuerySnapshot bookSelectedDocs = task.getResult();
+                                                 if(bookSelectedDocs.getDocuments().size() > 0) {
+                                                     BookSelected bookSelected = bookSelectedDocs.getDocuments().get(0).toObject(BookSelected.class);
+                                                     bookSelected.setId(bookSelectedDocs.getDocuments().get(0).getId());
+                                                     Log.d(TAG, "BookSelected đã tồn tại với ID: " + bookSelected.getId());
+                                                     updateQuantityBookSelected(bookSelected, 1);
+                                                 } else {
+                                                     Log.d(TAG, "Chưa tồn tại BookSelected");
+                                                     BookSelected bookSelected = new BookSelected(db.collection("Book").document(bookID), db.collection("Cart").document(cart.getId()), 1, new Timestamp(new Date()) );
+
+                                                     addBookSelected(bookSelected).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                         @Override
+                                                         public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                             if(task.isSuccessful()){
+                                                                 Log.d(TAG, "Added new BookSelected with ID: " + task.getResult().getId());
+                                                                 Log.d(TAG, "Thêm sách vào Cart thành công!");
+                                                             } else {
+                                                                 Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                                                             }
+                                                         }
+                                                     });
+                                                 }
+                                            } else {
+                                                Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                                            }
+                                        }
+                                    });
+                        } else {
+                            Log.d(TAG, "Chưa tồn tại Cart");
+                            Cart newCart = new Cart(db.collection("Customer").document(customerID), new Timestamp(new Date()));
+
+                            addCart(newCart)
+                                    .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                                            if(task.isSuccessful()){
+                                                String cartIDAdded = task.getResult().getId();
+                                                Log.d(TAG, "Added new Cart with ID: " + cartIDAdded);
+                                                BookSelected bookSelected = new BookSelected(db.collection("Book").document(bookID), db.collection("Cart").document(cartIDAdded), 1, new Timestamp(new Date()) );
+
+                                                addBookSelected(bookSelected).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                        if(task.isSuccessful()){
+                                                            Log.d(TAG, "Added new BookSelected with ID: " + task.getResult().getId());
+                                                            Log.d(TAG, "Thêm sách vào Cart thành công!");
+                                                        } else {
+                                                            Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                                                        }
+                                                    }
+                                                });
+                                            } else {
+                                                Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                                            }
+                                        }
+                                    });
+                        }
+                    } else {
+                        Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, "Error adding document", e);
-                    }
-                });
+                }
+            });
+    }
+
+    // Add new Cart doc autogenerate ID with converter
+    private Task<DocumentReference> addCart (Cart cart){
+        Map<String, Object> cartAdd = new HashMap<>();
+        cartAdd.put("customerID", cart.getCustomerID());
+        cartAdd.put("createdAt", cart.getCreatedAt());
+
+        // Add new Cart for Customer
+        return db.collection("Cart").add(cartAdd);
     }
 
     // Add new BookSelected doc autogenerate ID with converter
-    private void addBookSelected (BookSelected bookSelected) {
+    private Task<DocumentReference> addBookSelected (BookSelected bookSelected){
         Map<String, Object> bookSelectedAdd = new HashMap<>();
         bookSelectedAdd.put("bookID", bookSelected.getBookID());
         bookSelectedAdd.put("cartID",  bookSelected.getCartID());
         bookSelectedAdd.put("quantity", bookSelected.getQuantity());
         bookSelectedAdd.put("createdAt", bookSelected.getCreatedAt());
 
-        db.collection("BookSelected")
-                .add(bookSelectedAdd)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "Added new BookSelected with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, "Error adding BookSelected", e);
-                    }
-                });
+        // Add new BookSelected has bookID and cartID
+        return db.collection("BookSelected").add(bookSelectedAdd);
     }
 
     // Add rating doc autogenerate ID with converter
@@ -454,6 +517,139 @@ public class FirestoreActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Get Comment by bookID and CustomerID
+    private void getCommentedInBook (String bookID, String customerID) {
+        db.collection("Comment")
+                .whereEqualTo("bookID", db.collection("Book").document(bookID))
+                .whereEqualTo("customerID", db.collection("Customer").document(customerID))
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            QuerySnapshot commentDocs = task.getResult();
+                            if(commentDocs.getDocuments().size() > 0) {
+                                Comment comment = commentDocs.getDocuments().get(0).toObject(Comment.class);
+                                comment.setId(commentDocs.getDocuments().get(0).getId());
+                                Log.d(TAG, "Thông tin đánh giá: " + comment);
+                            } else {
+                                Log.d(TAG, "Không tìm thấy thông tin đánh giá sách!");
+                            }
+                        } else {
+                            Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                        }
+                    }
+                });
+    }
+
+    // ====================================> Rounting 4: Cart <==========================================
+    // Update quantity of BookSelected record with quanity = previousQuantity + 1;
+    private void updateQuantityBookSelected (BookSelected bookSelected, int quantityIncrease) {
+        int newQuantity = bookSelected.getQuantity() + quantityIncrease;
+        if(newQuantity > 0){
+            db.collection("BookSelected").document(bookSelected.getId())
+                    .update("quantity", newQuantity)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()) {
+                                Log.d(TAG, "Cập nhật số lượng thành công from: " + bookSelected.getQuantity() +  " to: " + newQuantity);
+                            } else {
+                                Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                            }
+                        }
+                    });
+        } else{
+            deleteBookSelectedByID(bookSelected.getId());
+        }
+    }
+
+    // Delete BookSelected by ID
+    private void deleteBookSelectedByID (String bookSelectedID) {
+        db.collection("BookSelected").document(bookSelectedID)
+                .delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                            Log.d(TAG, "Deleted successfully BookSelected with ID: " + bookSelectedID);
+                        } else {
+                            Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                        }
+                    }
+                });
+    }
+
+    // Get all BookSelected with CustomerID with converter
+    private void getAllBookSelectedByCustomerID (String customerID) {
+        db.collection("Cart")
+                .whereEqualTo("customerID", db.collection("Customer").document(customerID))
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot cartDocs = task.getResult();
+                            if(cartDocs.getDocuments().size() > 0) {
+                                Cart cart = cartDocs.getDocuments().get(0).toObject(Cart.class);
+                                cart.setId(cartDocs.getDocuments().get(0).getId());
+                                Log.d(TAG, "Customer has cart withID: " + cart.getId());
+
+                                db.collection("BookSelected")
+                                        .whereEqualTo("cartID", db.collection("Cart").document(cart.getId()))
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if(task.isSuccessful()){
+                                                    QuerySnapshot bookSelectedDocs = task.getResult();
+                                                    List<BookSelected> bookSelectedList = new ArrayList<>();
+
+                                                    for (int i = 0; i < bookSelectedDocs.getDocuments().size(); i++) {
+                                                        BookSelected bookSelected = bookSelectedDocs.getDocuments().get(0).toObject(BookSelected.class);
+                                                        bookSelected.setId(bookSelectedDocs.getDocuments().get(0).getId());
+                                                        ((DocumentReference)bookSelected.getBookID())
+                                                                .get()
+                                                                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                        if(task.isSuccessful()){
+                                                                            DocumentSnapshot doc = task.getResult();
+                                                                            if(doc.exists()){
+                                                                                Book book = doc.toObject(Book.class);
+                                                                                book.setId(doc.getId());
+                                                                                bookSelected.setBookID(book);
+
+                                                                                bookSelectedList.add(bookSelected);
+                                                                                Log.d(TAG, "BookSelected: " + bookSelected.toString());
+                                                                                Log.d(TAG, "Size: " + bookSelectedList.size());
+                                                                            } else {
+                                                                                Log.d(TAG, "Không tìm thấy thông tin sách ID: " + ((DocumentReference)bookSelected.getBookID()).getId());
+                                                                            }
+                                                                        } else {
+                                                                            Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                                                                        }
+                                                                    }
+                                                                });
+                                                    }
+                                                    logListData(bookSelectedList);
+                                                } else {
+                                                    Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                                                }
+                                            }
+                                        });
+                            } else {
+                                Log.d(TAG, "Không tìm thấy thông tin Cart của Customer!");
+                            }
+                        } else {
+                            Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                        }
+                    }
+                });
+    }
+
+// ====================================> End Rounting 4: Cart <==========================================
 
 
     // ====================================> Rounting 5:  Book Categories <==========================================

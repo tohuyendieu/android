@@ -10,6 +10,11 @@ public class Cart {
     public Cart() {
     }
 
+    public Cart(Object customerID, Timestamp createdAt) {
+        this.customerID = customerID;
+        this.createdAt = createdAt;
+    }
+
     public Cart(String id, Object customerID, Timestamp createdAt) {
         this.id = id;
         this.customerID = customerID;
