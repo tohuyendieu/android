@@ -18,8 +18,8 @@
     <string name="text_phone">Số điện thoại</string>
     <string name="text_agree_policy">Tôi đồng ý với các điều khoản sử dụng dịch vụ</string>
     <string name="text_double_back_exit">Chạm lần nữa để thoát</string>
-    <string name="txt_label_total">Total:</string>
-    <string name="txt_button_checkout">Check out</string>
+    <string name="txt_label_total">Tổng tiền: </string>
+    <string name="txt_button_checkout">Thanh toán</string>
     <string name="txt_label_total_price">0</string>
     <string name="txt_label_email_address">Email Address</string>
     <string name="txt_label_billing_address">Billing Address</string>
