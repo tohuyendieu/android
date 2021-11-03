@@ -1,6 +1,7 @@
 package fptu.ninhtbm.thebookshop.ui.home.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import fptu.ninhtbm.thebookshop.R;
 import fptu.ninhtbm.thebookshop.model.Book;
+import fptu.ninhtbm.thebookshop.ui.bookdetail.BookDetailActivity;
 
 public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapter.ViewHolder> {
 
@@ -42,6 +44,10 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
         Glide.with(mContext)
                 .load(book.getBookCoverImg())
                 .into(holder.imgBook);
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, BookDetailActivity.class);
+            mContext.startActivity(intent);
+        });
     }
 
     @Override
@@ -50,10 +56,12 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
     }
 
     protected static class ViewHolder extends RecyclerView.ViewHolder {
+        private final View itemView;
         private final ImageView imgBook;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            this.itemView = itemView;
             imgBook = itemView.findViewById(R.id.img_book);
         }
     }

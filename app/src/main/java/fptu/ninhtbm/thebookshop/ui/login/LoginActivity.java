@@ -11,6 +11,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import fptu.ninhtbm.thebookshop.R;
+import fptu.ninhtbm.thebookshop.ui.forgotpassword.ForgotPasswordActivity;
 import fptu.ninhtbm.thebookshop.ui.home.MainActivity;
 import fptu.ninhtbm.thebookshop.ui.signup.SignUpActivity;
 
@@ -51,6 +52,10 @@ public class LoginActivity extends AppCompatActivity {
         });
         mBtnSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(this, SignUpActivity.class);
+            startActivity(intent);
+        });
+        mBtnForgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ForgotPasswordActivity.class);
             startActivity(intent);
         });
     }

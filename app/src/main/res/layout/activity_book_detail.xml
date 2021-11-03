@@ -86,7 +86,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@string/txt_book_detail"
                 app:layout_constraintTop_toBottomOf="@id/text_author"
                 tools:text="đ55.300" />
 
