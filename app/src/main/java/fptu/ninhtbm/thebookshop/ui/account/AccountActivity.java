@@ -1,17 +1,23 @@
 package fptu.ninhtbm.thebookshop.ui.account;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import fptu.ninhtbm.thebookshop.R;
+import fptu.ninhtbm.thebookshop.library.WidgetUtils;
+import fptu.ninhtbm.thebookshop.ui.changepassword.ChangePasswordActivity;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -31,6 +37,13 @@ public class AccountActivity extends AppCompatActivity {
     private TextView mBtnLogout;
 
     private boolean isEditing;
+    private final ActivityResultLauncher<Intent> changePasswordResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    WidgetUtils.showSnackbar(mMainLayout, R.string.text_noti_change_password_success);
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +76,10 @@ public class AccountActivity extends AppCompatActivity {
     private void setListener() {
         mBtnBack.setOnClickListener(v -> finish());
         mBtnEdit.setOnClickListener(this::onEdit);
+        mBtnChangePassword.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ChangePasswordActivity.class);
+            changePasswordResultLauncher.launch(intent);
+        });
 
     }
 
@@ -86,8 +103,7 @@ public class AccountActivity extends AppCompatActivity {
             mTextPhone.setVisibility(View.VISIBLE);
             mTextName.setVisibility(View.VISIBLE);
             isEditing = false;
-            Snackbar snackbar = Snackbar.make(mMainLayout, R.string.text_noti_save_account_info_success, Snackbar.LENGTH_LONG);
-            snackbar.show();
+            WidgetUtils.showSnackbar(mMainLayout, R.string.text_noti_save_account_info_success);
         } else {
             mTextTitle.setText(getString(R.string.txt_changing_account_info));
             mBtnEdit.setImageResource(R.drawable.ic_round_save_32);
@@ -102,5 +118,4 @@ public class AccountActivity extends AppCompatActivity {
             isEditing = true;
         }
     }
-
 }

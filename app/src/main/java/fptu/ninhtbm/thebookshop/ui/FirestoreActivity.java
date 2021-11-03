@@ -56,7 +56,7 @@ public class FirestoreActivity extends AppCompatActivity {
 //        testFirestore();
 
         // SOME METHOD TO CALL FIRESTORE WITH EACH ROUTING
-//        getTopBookByField(5, "totalBookSelled");      // Rounting 1
+        getTopBookByField(5, "totalBookSelled");      // Rounting 1
 //        getTopBookByField(5, "createdAt");            // Rounting 1
 //        getTopBookByField(5, "avgRated");             // Rounting 1
 //        getTopBookByField(5, "discount");             // Rounting 1
@@ -387,52 +387,6 @@ public class FirestoreActivity extends AppCompatActivity {
                         }
                     }
                 });
-//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                        if (queryDocumentSnapshots.getDocuments().size() > 0) {
-//                            Account account = queryDocumentSnapshots.getDocuments().get(0).toObject(Account.class);
-//                            if(account.isStatus() == false) {
-//                                Log.d(TAG, "Tài khoản đang bị khóa, vui lòng liên hệ với Admin để tiếp tục truy cập");
-//                            } else {
-//                                account.setId(queryDocumentSnapshots.getDocuments().get(0).getId());
-//                                Log.d(TAG, account.toString());
-//                                db.collection("Customer")
-//                                        .whereEqualTo("accountID", db.collection("Account").document(account.getId()))
-//                                        .get()
-//                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                                            @Override
-//                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                                if(task.isSuccessful()) {
-//                                                    QuerySnapshot documents = task.getResult();
-//                                                    if (documents.getDocuments().size() > 0) {
-//                                                        Customer customer = documents.getDocuments().get(0).toObject(Customer.class);
-//                                                    customer.setId(documents.getDocuments().get(0).getId());
-//                                                    customer.setAccountID(account);
-//
-//                                                    Log.d(TAG, "Đăng nhập thành công!");
-//                                                    Log.d(TAG, customer.toString());
-//                                                    } else {
-//                                                        Log.d(TAG, "Không tìm thấy thông tin Customer!");
-//                                                    }
-//                                                } else {
-//                                                    Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
-//                                                }
-//                                            }
-//                                        });
-//                            }
-//
-//                        } else {
-//                            Log.d(TAG, "Tên tài khoản hoặc mật khẩu sai!");
-//                        }
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.d(TAG, "Có lỗi xảy ra "+ e.toString());
-//                    }
-//                });
     }
 
 

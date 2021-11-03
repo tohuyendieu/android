@@ -3,6 +3,8 @@
     <string name="text_search_hint">Search cái gì đó đi</string>
     <string name="text_account">Tài khoản</string>
     <string name="text_password">Mật khẩu</string>
+    <string name="text_old_password">Mật khẩu cũ</string>
+    <string name="text_new_password">Mật khẩu mới</string>
     <string name="text_repassword">Xác nhận lại mật khẩu</string>
     <string name="text_forgot_password">Quên mật khẩu?</string>
     <string name="text_login">Đăng nhập</string>
@@ -31,4 +33,13 @@
     <string name="text_about_app">Thông tin ứng dụng</string>
     <string name="text_history_order">Lịch sử đặt hàng</string>
     <string name="text_noti_save_account_info_success">Sửa đổi thông tin cá nhân hoàn tất</string>
+    <string name="text_noti_change_password_success">Đổi mật khẩu thành công</string>
+    <string name="txt_book_detail">Chi tiết sản phẩm</string>
+    <string name="text_add_to_cart">Thêm vào giở hàng</string>
+    <string name="txt_publisher">Nhà xuất bản</string>
+    <string name="txt_publisher_date">Ngày xuất bản</string>
+    <string name="txt_total_page">Số trang</string>
+    <string name="txt_category">Thể loại</string>
+    <string name="txt_description">Sơ lược về tác phẩm</string>
+    <string name="txt_confirm">Xác nhân</string>
 </resources>

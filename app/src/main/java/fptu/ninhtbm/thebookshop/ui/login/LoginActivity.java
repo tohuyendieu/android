@@ -36,8 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     private void initViews() {
         mInputLayoutUsername = findViewById(R.id.text_layout_username);
         mInputTextUsername = findViewById(R.id.edt_username);
-        mInputLayoutPassword = findViewById(R.id.text_layout_password);
-        mInputTextPassword = findViewById(R.id.edt_password);
+        mInputLayoutPassword = findViewById(R.id.text_layout_old_password);
+        mInputTextPassword = findViewById(R.id.edt_old_password);
         mBtnForgotPassword = findViewById(R.id.btn_forgot_password);
         mBtnLogin = findViewById(R.id.btn_login);
         mBtnSignUp = findViewById(R.id.btn_sign_up);
