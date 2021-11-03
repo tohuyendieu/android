@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheBookshop">
         <activity
+            android:name=".ui.listbook.SearchBookActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.listbook.ListBookActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.forgotpassword.ForgotPasswordActivity"
             android:exported="true" />
         <activity

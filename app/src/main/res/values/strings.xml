@@ -42,4 +42,9 @@
     <string name="txt_category">Thể loại</string>
     <string name="txt_description">Sơ lược về tác phẩm</string>
     <string name="txt_confirm">Xác nhân</string>
+    <string name="text_option_popular">Phổ Biến</string>
+    <string name="text_option_new">Mới nhất</string>
+    <string name="text_option_sale">Bán chạy</string>
+    <string name="text_option_price">Giá</string>
+    <string name="text_view_more_book">Xem thêm sách</string>
 </resources>
