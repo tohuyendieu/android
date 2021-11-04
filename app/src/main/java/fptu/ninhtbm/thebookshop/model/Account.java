@@ -49,7 +49,7 @@ public class Account {
         this.password = password;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

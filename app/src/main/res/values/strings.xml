@@ -52,4 +52,8 @@
     <string name="txt_top_rate">Sách được đánh giá cao</string>
     <string name="txt_top_sale_off">Sách HOT - giảm sốc</string>
     <string name="txt_vew_all_book">xem tất cả sách</string>
+    <string name="txt_noti_account_disabled_login">Tài khoản đang bị khóa, vui lòng liên hệ với Admin để tiếp tục truy cập</string>
+    <string name="txt_noti_account_login_not_found">Không tìm thấy tài khoản yêu cầu!</string>
+    <string name="txt_noti_login_failure">Đăng nhập có lỗi. Xin vui lòng thử lại!</string>
+    <string name="txt_account_or_password_not_match">Tên tài khoản hoặc mật khẩu sai!</string>
 </resources>

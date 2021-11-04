@@ -2,10 +2,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_color"
     tools:context=".ui.login.LoginActivity">
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:trackColor="@color/important_button_color" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -99,12 +108,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/text_sign_up"
-            app:rippleColor="@color/important_button_color"
             android:textColor="@color/important_button_color"
             app:cornerRadius="50dp"
             app:layout_constraintEnd_toEndOf="@+id/text_layout_old_password"
             app:layout_constraintStart_toStartOf="@+id/text_layout_old_password"
-            app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_login"
+            app:rippleColor="@color/important_button_color" />
 
         <TextView
             android:layout_width="wrap_content"
