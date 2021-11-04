@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,6 +33,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import fptu.ninhtbm.thebookshop.R;
 import fptu.ninhtbm.thebookshop.model.Account;
@@ -40,6 +45,7 @@ import fptu.ninhtbm.thebookshop.model.Cart;
 import fptu.ninhtbm.thebookshop.model.Category;
 import fptu.ninhtbm.thebookshop.model.Comment;
 import fptu.ninhtbm.thebookshop.model.Customer;
+import fptu.ninhtbm.thebookshop.model.Order;
 import fptu.ninhtbm.thebookshop.model.Publisher;
 import fptu.ninhtbm.thebookshop.model.Stock;
 
@@ -75,10 +81,12 @@ public class FirestoreActivity extends AppCompatActivity {
 //        updateComment("dUAauOA7orbWTiqtPI9Q", 3); // Rounting 3
 //        getCommentedInBook("0oRxIqalaGZGgWl6H4Ld" ,"4yMOdgrzNcdLU2quUk7A");   //Rounting 3
 //        addBookSelected(new BookSelected(db.collection("Book").document("123"), db.collection("Cart").document("234"), 1, new Timestamp(new Date())));
-//        addBookToCart("AnBBxrKJHzceljqhhTtr", "5b1RnyIOPla1RvNw4cip");
+//        addBookToCart("AnBBxrKJHzceljqhhTtr", "5b1RnyIOPla1RvNw4cip");    //Rounting 3
+        getAllBookSelectedByCustomerID("AnBBxrKJHzceljqhhTtr");       //Rounting 3
 
-        getAllBookSelectedByCustomerID("AnBBxrKJHzceljqhhTtr");
+
 //        getAllBookByCategoryID("zna5C9ZCKki5V8L97LZn");  // Rounting 5
+//        getAllCategory();     // Rounting 5
 
 //        addAccountAndCustomerInfo(new Account("King123", "123456"), new Customer("King Wisdom", "Hòa Lạc",  "kingwisdom.dev@gmail.com", "0337220922"));  // Rounting 8
 
@@ -607,8 +615,9 @@ public class FirestoreActivity extends AppCompatActivity {
                                                     List<BookSelected> bookSelectedList = new ArrayList<>();
 
                                                     for (int i = 0; i < bookSelectedDocs.getDocuments().size(); i++) {
-                                                        BookSelected bookSelected = bookSelectedDocs.getDocuments().get(0).toObject(BookSelected.class);
-                                                        bookSelected.setId(bookSelectedDocs.getDocuments().get(0).getId());
+                                                        final int index = i;
+                                                        BookSelected bookSelected = bookSelectedDocs.getDocuments().get(index).toObject(BookSelected.class);
+                                                        bookSelected.setId(bookSelectedDocs.getDocuments().get(index).getId());
                                                         ((DocumentReference)bookSelected.getBookID())
                                                                 .get()
                                                                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -622,18 +631,22 @@ public class FirestoreActivity extends AppCompatActivity {
                                                                                 bookSelected.setBookID(book);
 
                                                                                 bookSelectedList.add(bookSelected);
-                                                                                Log.d(TAG, "BookSelected: " + bookSelected.toString());
-                                                                                Log.d(TAG, "Size: " + bookSelectedList.size());
+//                                                                                Log.d(TAG, "BookSelected: " + bookSelected.toString());
                                                                             } else {
                                                                                 Log.d(TAG, "Không tìm thấy thông tin sách ID: " + ((DocumentReference)bookSelected.getBookID()).getId());
                                                                             }
                                                                         } else {
                                                                             Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
                                                                         }
+                                                                        // Return data if end for loop
+                                                                        if(index == bookSelectedDocs.getDocuments().size() - 1) {
+                                                                            logListData(bookSelectedList);
+//                                                                            ( (Button)findViewById(R.id.btnTestFirestore)).setText(bookSelectedList.size() + "xx");
+                                                                            getFirstBookUnAvailabeToSell(bookSelectedList);
+                                                                        }
                                                                     }
                                                                 });
                                                     }
-                                                    logListData(bookSelectedList);
                                                 } else {
                                                     Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
                                                 }
@@ -649,7 +662,7 @@ public class FirestoreActivity extends AppCompatActivity {
                 });
     }
 
-// ====================================> End Rounting 4: Cart <==========================================
+    // ====================================> End Rounting 4: Cart <==========================================
 
 
     // ====================================> Rounting 5:  Book Categories <==========================================
@@ -670,13 +683,39 @@ public class FirestoreActivity extends AppCompatActivity {
                                     book.setId(docs.getDocuments().get(i).getId());
                                     bookList.add(book);
                                 }
-
                                 logListData(bookList);
                             } else {
                                 Log.d(TAG, "Không tìm thấy thông tin sách tương ứng");
                             }
                         } else {
                             Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void getAllCategory() {
+        db.collection("Category")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            QuerySnapshot docs = task.getResult();
+                            if(docs.getDocuments().size() > 0) {
+                                List<Category> categoryList = new ArrayList<>();
+                                for (int i = 0; i < docs.getDocuments().size(); i++) {
+                                    Category category = docs.getDocuments().get(i).toObject(Category.class);
+                                    category.setId(docs.getDocuments().get(i).getId());
+                                    categoryList.add(category);
+                                }
+                                logListData(categoryList);
+                            } else {
+                                Log.d(TAG, "Không tìm thấy danh mục sách tương ứng");
+                            }
+                        } else {
+                            Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+
                         }
                     }
                 });
@@ -795,6 +834,158 @@ public class FirestoreActivity extends AppCompatActivity {
 
 
     // ====================================> End Rounting 8: Sign Up <==========================================
+
+    // ====================================> Rounting 9: Checkout cart <==========================================
+    // Checkout all book in cart and do some logic
+    private void checkoutCart (List<BookSelected> bookSelectedList, Order order) {
+        // Check quantity in stock of all book in cart
+        if (bookSelectedList.size() > 0) {
+
+        } else {
+            Log.d(TAG, "Vui lòng chọn sản phẩm để thực hiện thanh toán!");
+        }
+    }
+//    const checkoutCart = async (db, cart, order) => {
+//            const firstBookUnAvailable = await getFirstBookUnAvailabeToSell(db, cart);
+//            if (firstBookUnAvailable == null) {
+//                // Thêm order mới
+//                const orderDocAdded = await addOrder(db, order);
+//                const orderId = orderDocAdded.id;
+//
+//                // Thêm orderitem mới
+//                for (let i = 0; i < cart.length; i++) {
+//                    const item = cart[i];
+//                    const orderItem = new OrderItem(null, doc(db, "Book", item.bookData.bookId), doc(db, "Order", orderId), item.quantity, item.bookData.price, item.bookData.discount);
+//                    await addOrderItem(db, orderItem);
+//                }
+//                // Cập nhật totalBookSelled cho Book và quantity cho Stock
+//                await updateQuantityBook(db, cart);
+//
+//                // Xóa các item trong cart vừa checkout
+//                for (let i = 0; i < cart.length; i++) {
+//                    const item = cart[i];
+//                    await deleteBookSelectedByID(db, item.id);
+//                }
+//                console.log("Đủ bán")
+//            } else {
+//                console.log("Sách trong kho không đủ để bán", firstBookUnAvailable)
+//            }
+//    }
+
+
+    // Check book in stock is available or not to checkout,
+    // If not available return first bookInfo unavailable, otherwise return null
+    private void getFirstBookUnAvailabeToSell (List<BookSelected> bookSelectedList) {
+        Task t1 = db.collection("Book").get();
+        Task t2 = db.collection("Stock").get();
+
+        Task combinedTask = Tasks.whenAllSuccess(t1, t2).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
+            @Override
+            public void onSuccess(List<Object> list) {
+                // Get data from firestore return with object
+                List<DocumentSnapshot> bookDocList = ((QuerySnapshot) list.get(0)).getDocuments();
+                Map<String, Object> bookMap = new HashMap<>();
+                for (int i = 0; i < bookDocList.size(); i++) {
+                    Book book = (Book) bookDocList.get(i).toObject(Book.class);
+                    book.setId(bookDocList.get(i).getId());
+                    bookMap.put(book.getId(), book);
+                }
+
+                List<DocumentSnapshot> stockDocList = ((QuerySnapshot) list.get(1)).getDocuments();
+                Map<String, Object> stockMap = new HashMap<>();
+                for (int i = 0; i < stockDocList.size(); i++) {
+                    Stock stock = (Stock) stockDocList.get(i).toObject(Stock.class);
+                    stock.setId(stockDocList.get(i).getId());
+                    stockMap.put(stock.getId(), stock);
+                }
+
+                boolean canCheckout = true;
+                for (int i = 0; i < bookSelectedList.size(); i++) {
+                    BookSelected item = bookSelectedList.get(i);
+                    String bookId = ((Book) item.getBookID()).getId();
+                    Book book = (Book) bookMap.get(bookId);
+                    Stock stock = (Stock) stockMap.get(((DocumentReference) book.getStockID()).getId());
+                    if (item.getQuantity() > stock.getQuantity()) {
+//                        Log.d(TAG, "Số lượng sách ID: " + book.getId() + " trong kho không đủ.");
+                        canCheckout = false;
+                        break;
+                    }
+                }
+
+                if (canCheckout) {
+
+                } else {
+                    Log.d(TAG, "Số lượng trong kho không đủ.");
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "Có lỗi khi lấy thông tin sách.");
+            }
+        });
+    }
+    
+//    private void getFirstBookUnAvailabeToSell (List<BookSelected> bookSelectedList) {
+//        final boolean[] needCheckNextItem = {true};
+//        for (int i = 0; i < bookSelectedList.size(); i++) {
+//            if(needCheckNextItem[0]){
+//                BookSelected item = bookSelectedList.get(i);
+//                String bookId = ((Book) item.getBookID()).getId();
+//                DocumentReference bookDoc = db.collection("Book").document(bookId);
+//                bookDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            if(task.getResult().exists()){
+//                                Book book = task.getResult().toObject(Book.class);
+//                                book.setId(task.getResult().getId());
+//                                DocumentReference stockDocRef = (DocumentReference)book.getStockID();
+//                                if(stockDocRef != null){
+//                                    stockDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                                            if(task.isSuccessful()){
+//                                                if(task.getResult().exists()) {
+//                                                    Stock stock = task.getResult().toObject(Stock.class);
+//                                                    stock.setId(task.getResult().getId());
+//                                                    int stockQuantity = stock.getQuantity();
+//                                                    if(item.getQuantity() > stockQuantity){
+//                                                        Log.d(TAG, "Số lượng sách ID: " + book.getId() + " trong kho không đủ.");
+//                                                        needCheckNextItem[0] = false;
+//                                                    } else {
+//                                                        Log.d(TAG, "Số lượng trong kho thỏa mãn!");
+//                                                    }
+//                                                } else {
+//                                                    Log.d(TAG, "Không tìm thấy thông tin kho!");
+//                                                    needCheckNextItem[0] = false;
+//                                                }
+//                                            } else {
+//                                                Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+//                                                needCheckNextItem[0] = false;
+//                                            }
+//                                        }
+//                                    });
+//                                } else {
+//                                    Log.d(TAG, "Không tồn tại sách trong kho!");
+//                                    needCheckNextItem[0] = false;
+//                                }
+//                            } else {
+//                                Log.d(TAG, "Không tìm thấy thông tin sách!");
+//                                needCheckNextItem[0] = false;
+//                            }
+//                        } else {
+//                            Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+//                            needCheckNextItem[0] = false;
+//                        }
+//                    }
+//                });
+//            } else break;
+//        }
+//    }
+
+
+
 
     // ====================================> Rounting 10: Change Password <==========================================
 
