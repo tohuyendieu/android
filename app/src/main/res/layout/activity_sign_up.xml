@@ -112,7 +112,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/text_layout_password"
+                android:id="@+id/text_layout_old_password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_layout_email">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_password"
+                    android:id="@+id/edt_old_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
@@ -140,9 +140,9 @@
                 android:hint="@string/text_repassword"
                 app:endIconMode="password_toggle"
                 app:errorEnabled="true"
-                app:layout_constraintEnd_toEndOf="@+id/text_layout_password"
-                app:layout_constraintStart_toStartOf="@+id/text_layout_password"
-                app:layout_constraintTop_toBottomOf="@+id/text_layout_password">
+                app:layout_constraintEnd_toEndOf="@+id/text_layout_old_password"
+                app:layout_constraintStart_toStartOf="@+id/text_layout_old_password"
+                app:layout_constraintTop_toBottomOf="@+id/text_layout_old_password">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_repassword"

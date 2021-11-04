@@ -3,6 +3,8 @@
     <string name="text_search_hint">Search cái gì đó đi</string>
     <string name="text_account">Tài khoản</string>
     <string name="text_password">Mật khẩu</string>
+    <string name="text_old_password">Mật khẩu cũ</string>
+    <string name="text_new_password">Mật khẩu mới</string>
     <string name="text_repassword">Xác nhận lại mật khẩu</string>
     <string name="text_forgot_password">Quên mật khẩu?</string>
     <string name="text_login">Đăng nhập</string>
@@ -16,8 +18,8 @@
     <string name="text_phone">Số điện thoại</string>
     <string name="text_agree_policy">Tôi đồng ý với các điều khoản sử dụng dịch vụ</string>
     <string name="text_double_back_exit">Chạm lần nữa để thoát</string>
-    <string name="txt_label_total">Total:</string>
-    <string name="txt_button_checkout">Check out</string>
+    <string name="txt_label_total">Tổng tiền: </string>
+    <string name="txt_button_checkout">Thanh toán</string>
     <string name="txt_label_total_price">0</string>
     <string name="txt_label_email_address">Email Address</string>
     <string name="txt_label_billing_address">Billing Address</string>
@@ -31,4 +33,27 @@
     <string name="text_about_app">Thông tin ứng dụng</string>
     <string name="text_history_order">Lịch sử đặt hàng</string>
     <string name="text_noti_save_account_info_success">Sửa đổi thông tin cá nhân hoàn tất</string>
+    <string name="text_noti_change_password_success">Đổi mật khẩu thành công</string>
+    <string name="txt_book_detail">Chi tiết sản phẩm</string>
+    <string name="text_add_to_cart">Thêm vào giở hàng</string>
+    <string name="txt_publisher">Nhà xuất bản</string>
+    <string name="txt_publisher_date">Ngày xuất bản</string>
+    <string name="txt_total_page">Số trang</string>
+    <string name="txt_category">Thể loại</string>
+    <string name="txt_description">Sơ lược về tác phẩm</string>
+    <string name="txt_confirm">Xác nhân</string>
+    <string name="text_option_popular">Phổ Biến</string>
+    <string name="text_option_new">Mới nhất</string>
+    <string name="text_option_sale">Bán chạy</string>
+    <string name="text_option_price">Giá</string>
+    <string name="text_view_more_book">Xem thêm sách</string>
+    <string name="txt_best_sale">Sách bán chạy</string>
+    <string name="txt_top_new">Sách mới nhất</string>
+    <string name="txt_top_rate">Sách được đánh giá cao</string>
+    <string name="txt_top_sale_off">Sách HOT - giảm sốc</string>
+    <string name="txt_vew_all_book">xem tất cả sách</string>
+    <string name="txt_noti_account_disabled_login">Tài khoản đang bị khóa, vui lòng liên hệ với Admin để tiếp tục truy cập</string>
+    <string name="txt_noti_account_login_not_found">Không tìm thấy tài khoản yêu cầu!</string>
+    <string name="txt_noti_login_failure">Đăng nhập có lỗi. Xin vui lòng thử lại!</string>
+    <string name="txt_account_or_password_not_match">Tên tài khoản hoặc mật khẩu sai!</string>
 </resources>

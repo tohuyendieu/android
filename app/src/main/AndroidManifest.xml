@@ -12,6 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheBookshop">
         <activity
+            android:name=".ui.listbook.SearchBookActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.listbook.ListBookActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.forgotpassword.ForgotPasswordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.changepassword.ChangePasswordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.bookdetail.BookDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.FirestoreActivity"
             android:exported="true" />
         <activity
@@ -34,6 +49,7 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

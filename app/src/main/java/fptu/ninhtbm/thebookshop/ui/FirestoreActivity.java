@@ -65,7 +65,7 @@ public class FirestoreActivity extends AppCompatActivity {
 //        testFirestore();
 
         // SOME METHOD TO CALL FIRESTORE WITH EACH ROUTING
-//        getTopBookByField(5, "totalBookSelled");      // Rounting 1
+        getTopBookByField(5, "totalBookSelled");      // Rounting 1
 //        getTopBookByField(5, "createdAt");            // Rounting 1
 //        getTopBookByField(5, "avgRated");             // Rounting 1
 //        getTopBookByField(5, "discount");             // Rounting 1
@@ -739,7 +739,7 @@ public class FirestoreActivity extends AppCompatActivity {
                             QuerySnapshot accountDocs = task.getResult();
                             if(accountDocs.getDocuments().size() > 0) {
                                 Account account = accountDocs.getDocuments().get(0).toObject(Account.class);
-                                if(account.isStatus() == false) {
+                                if(account.getStatus() == false) {
                                     Log.d(TAG, "Tài khoản đang bị khóa, vui lòng liên hệ với Admin để tiếp tục truy cập");
                                 } else {
                                     account.setId(accountDocs.getDocuments().get(0).getId());

@@ -201,7 +201,6 @@
                 app:drawableTint="@color/selector_icon_item_menu_color" />
 
             <View
-                android:id="@+id/divider1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="12dp"
@@ -229,7 +228,6 @@
                 app:drawableTint="@color/selector_icon_item_menu_color" />
 
             <View
-                android:id="@+id/divider3"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="12dp"
@@ -257,7 +255,6 @@
                 app:drawableTint="@color/selector_icon_item_menu_color" />
 
             <View
-                android:id="@+id/divider4"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="12dp"
@@ -285,7 +282,6 @@
                 app:drawableTint="@color/selector_icon_item_menu_color" />
 
             <View
-                android:id="@+id/divider2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="12dp"

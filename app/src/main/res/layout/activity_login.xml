@@ -2,10 +2,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_color"
     tools:context=".ui.login.LoginActivity">
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:trackColor="@color/important_button_color" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -48,7 +57,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_layout_password"
+            android:id="@+id/text_layout_old_password"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -64,7 +73,7 @@
             app:layout_constraintTop_toBottomOf="@+id/text_layout_username">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_password"
+                android:id="@+id/edt_old_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -77,8 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/text_forgot_password"
-            app:layout_constraintEnd_toEndOf="@+id/text_layout_password"
-            app:layout_constraintTop_toBottomOf="@+id/text_layout_password" />
+            app:layout_constraintEnd_toEndOf="@+id/text_layout_old_password"
+            app:layout_constraintTop_toBottomOf="@+id/text_layout_old_password" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_login"
@@ -88,9 +97,9 @@
             android:backgroundTint="@color/important_button_color"
             android:text="@string/text_login"
             app:cornerRadius="50dp"
-            app:layout_constraintEnd_toEndOf="@+id/text_layout_password"
-            app:layout_constraintStart_toStartOf="@+id/text_layout_password"
-            app:layout_constraintTop_toBottomOf="@+id/text_layout_password" />
+            app:layout_constraintEnd_toEndOf="@+id/text_layout_old_password"
+            app:layout_constraintStart_toStartOf="@+id/text_layout_old_password"
+            app:layout_constraintTop_toBottomOf="@+id/text_layout_old_password" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_sign_up"
@@ -99,12 +108,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/text_sign_up"
-            app:rippleColor="@color/important_button_color"
             android:textColor="@color/important_button_color"
             app:cornerRadius="50dp"
-            app:layout_constraintEnd_toEndOf="@+id/text_layout_password"
-            app:layout_constraintStart_toStartOf="@+id/text_layout_password"
-            app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+            app:layout_constraintEnd_toEndOf="@+id/text_layout_old_password"
+            app:layout_constraintStart_toStartOf="@+id/text_layout_old_password"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login"
+            app:rippleColor="@color/important_button_color" />
 
         <TextView
             android:layout_width="wrap_content"
