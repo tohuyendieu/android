@@ -56,4 +56,8 @@
     <string name="txt_noti_account_login_not_found">Không tìm thấy tài khoản yêu cầu!</string>
     <string name="txt_noti_login_failure">Đăng nhập có lỗi. Xin vui lòng thử lại!</string>
     <string name="txt_account_or_password_not_match">Tên tài khoản hoặc mật khẩu sai!</string>
+    <string name="text_address">Địa chỉ</string>
+    <string name="txt_view_more">Xem thêm</string>
+    <string name="txt_author_description">Đôi nét về tác giả</string>
+    <string name="txt_rate">Đánh giá</string>
 </resources>

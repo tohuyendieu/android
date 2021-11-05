@@ -176,7 +176,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="@string/text_phone"
+                android:hint="@string/text_address"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="@+id/text_layout_phone"
                 app:layout_constraintStart_toStartOf="@+id/text_layout_phone"
@@ -193,6 +193,7 @@
     </ScrollView>
 
     <CheckBox
+        android:buttonTint="@color/primary_color"
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

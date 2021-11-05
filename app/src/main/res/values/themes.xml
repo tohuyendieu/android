@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
     <!-- Splash Screen theme. -->
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
@@ -37,6 +38,14 @@
     <style name="TextBlack18">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="TextRed18">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/important_button_color</item>
+    </style>
+    <style name="TextWhite18">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="LabelBlack24">
