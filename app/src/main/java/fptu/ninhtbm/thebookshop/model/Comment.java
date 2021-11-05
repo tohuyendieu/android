@@ -20,6 +20,13 @@ public class Comment {
         this.createdAt = createdAt;
     }
 
+    public Comment(Object bookID, Object customerID, int rate, Timestamp createdAt) {
+        this.bookID = bookID;
+        this.customerID = customerID;
+        this.rate = rate;
+        this.createdAt = createdAt;
+    }
+
     public String getId() {
         return id;
     };

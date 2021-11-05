@@ -11,6 +11,14 @@ public class OrderItem {
     public OrderItem() {
     }
 
+    public OrderItem(Object bookID, Object orderID, int quantity, double sellPrice, double discount) {
+        this.bookID = bookID;
+        this.orderID = orderID;
+        this.quantity = quantity;
+        this.sellPrice = sellPrice;
+        this.discount = discount;
+    }
+
     public OrderItem(String id, Object bookID, Object orderID, int quantity, double sellPrice, double discount) {
         this.id = id;
         this.bookID = bookID;
