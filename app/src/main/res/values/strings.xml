@@ -60,4 +60,8 @@
     <string name="txt_view_more">Xem thêm</string>
     <string name="txt_author_description">Đôi nét về tác giả</string>
     <string name="txt_rate">Đánh giá</string>
+    <string name="txt_profile">Trang cá nhân</string>
+    <string name="txt_cart">Giỏ hàng</string>
+    <string name="txt_load_caterory_error">Không tìm thấy danh mục sách tương ứng</string>
+    <string name="txt_noti_loading_failure">Có lỗi. Xin vui lòng thử lại!</string>
 </resources>

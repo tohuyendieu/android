@@ -4,33 +4,45 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fptu.ninhtbm.thebookshop.R;
+import fptu.ninhtbm.thebookshop.library.WidgetUtils;
 import fptu.ninhtbm.thebookshop.model.Book;
+import fptu.ninhtbm.thebookshop.model.Category;
 import fptu.ninhtbm.thebookshop.ui.account.AccountActivity;
 import fptu.ninhtbm.thebookshop.ui.cart.CartActivity;
 import fptu.ninhtbm.thebookshop.ui.home.adapter.BookRecyclerAdapter;
 import fptu.ninhtbm.thebookshop.ui.home.adapter.SliderBannerAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IMainActivity{
 
     private ImageButton mBtnMenu;
     private ImageButton mBtnCart;
     private ImageButton mBtnProfile;
     private BadgeDrawable badgeDrawable;
+
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
 
     private SliderBannerAdapter mSliderBannerAdapter;
     private SliderView mSliderView;
@@ -57,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         mBtnProfile = findViewById(R.id.btn_profile);
         mSliderView = findViewById(R.id.slider_banner);
         mBestSaleBookRecyclerView = findViewById(R.id.rc_list_best_sale_book);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mNavigationView = findViewById(R.id.navigation_view);
 
         badgeDrawable = BadgeDrawable.create(this);
         badgeDrawable.setBadgeGravity(BadgeDrawable.TOP_END);
@@ -64,6 +78,15 @@ public class MainActivity extends AppCompatActivity {
         badgeDrawable.setBadgeTextColor(Color.WHITE);
         BadgeUtils.attachBadgeDrawable(badgeDrawable, mBtnCart);
 
+        setUpAutoSlidingBanner();
+
+        mBookList = new ArrayList<>();
+        mBestSaleBookAdapter = new BookRecyclerAdapter(this, mBookList);
+        mBestSaleBookRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mBestSaleBookRecyclerView.setAdapter(mBestSaleBookAdapter);
+    }
+
+    private void setUpAutoSlidingBanner() {
         mImageList = new ArrayList<>();
         mSliderBannerAdapter = new SliderBannerAdapter(this, mImageList);
         mSliderView.setSliderAdapter(mSliderBannerAdapter);
@@ -82,14 +105,16 @@ public class MainActivity extends AppCompatActivity {
 
         // to start autocycle below method is used.
         mSliderView.startAutoCycle();
-
-        mBookList = new ArrayList<>();
-        mBestSaleBookAdapter = new BookRecyclerAdapter(this, mBookList);
-        mBestSaleBookRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mBestSaleBookRecyclerView.setAdapter(mBestSaleBookAdapter);
     }
 
     private void setListener() {
+        mBtnMenu.setOnClickListener(v -> mDrawerLayout.openDrawer(GravityCompat.START));
+        mNavigationView.setNavigationItemSelectedListener(MenuItem -> {
+            if("Ao".contentEquals(MenuItem.getTitle())){
+                Toast.makeText(this, "oke", Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        });
         mBtnProfile.setOnClickListener(v -> {
             Intent intent = new Intent(this, AccountActivity.class);
             startActivity(intent);
@@ -106,15 +131,8 @@ public class MainActivity extends AppCompatActivity {
         badgeDrawable.setNumber(9);
         mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/154/original/ABCH_Fall21_2048x600_Ad.jpg");
         mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/156/original/The_Dawn_Of_Everything_-_Bookshop_-_2048x600.jpg");
-        mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/154/original/ABCH_Fall21_2048x600_Ad.jpg`");
+        mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/157/original/StrangerInTheLifeboat_2048x600_rev2_%281%29.jpg");
         mSliderBannerAdapter.notifyDataSetChanged();
-        // todo: fake book data
-        Book b = new Book();
-        b.setBookCoverImg("https://images-us.bookshop.org/ingram/9781538730225.jpg");
-        mBookList.add(b);
-        mBookList.add(b);
-        mBookList.add(b);
-        mBestSaleBookAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -127,5 +145,19 @@ public class MainActivity extends AppCompatActivity {
         }
         pressedTime = System.currentTimeMillis();
 
+    }
+
+    @Override
+    public void popSnackbarNotification(int messageResId) {
+        WidgetUtils.showSnackbar(findViewById(R.id.root_layout), messageResId);
+    }
+
+    @Override
+    public void loadCategories(List<Category> categoryList) {
+        Menu m = mNavigationView.getMenu();
+        SubMenu topChannelMenu = m.addSubMenu(getString(R.string.txt_category));
+        for(Category c : categoryList){
+            topChannelMenu.add(c.getTitle());
+        }
     }
 }

@@ -644,7 +644,7 @@ public class FirestoreActivity extends AppCompatActivity {
     // Get all Book with CategoryID with converter
     private void getAllBookByCategoryID (String categoryID) {
         db.collection("Book")
-                .whereEqualTo("categoryID", db.collection("Category").document(categoryID))
+                .whereEqualTo("1ID", db.collection("Category").document(categoryID))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
