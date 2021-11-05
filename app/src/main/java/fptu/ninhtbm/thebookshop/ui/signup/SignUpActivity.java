@@ -2,7 +2,6 @@ package fptu.ninhtbm.thebookshop.ui.signup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -13,7 +12,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import fptu.ninhtbm.thebookshop.R;
 import fptu.ninhtbm.thebookshop.library.WidgetUtils;
-import fptu.ninhtbm.thebookshop.ui.login.LoginActivity;
 import fptu.ninhtbm.thebookshop.ui.signup.presenter.ISignUpPresenter;
 import fptu.ninhtbm.thebookshop.ui.signup.presenter.SignUpPresenter;
 
@@ -86,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity implements ISignUpActivity
             mBtnSignUp.setEnabled(isConfirmService);
         });
         mBtnLogin.setOnClickListener(v -> {
-            directToLogin();
+            backToLogin();
         });
     }
 
@@ -96,9 +94,7 @@ public class SignUpActivity extends AppCompatActivity implements ISignUpActivity
     }
 
     @Override
-    public void directToLogin() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+    public void backToLogin() {
         finish();
     }
 
@@ -106,4 +102,5 @@ public class SignUpActivity extends AppCompatActivity implements ISignUpActivity
     public void setProgressLoading(boolean isLoading) {
         mProgressBar.setVisibility(isLoading ? View.VISIBLE : View.INVISIBLE);
     }
+
 }
