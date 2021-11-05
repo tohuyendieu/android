@@ -46,6 +46,7 @@ import fptu.ninhtbm.thebookshop.model.Category;
 import fptu.ninhtbm.thebookshop.model.Comment;
 import fptu.ninhtbm.thebookshop.model.Customer;
 import fptu.ninhtbm.thebookshop.model.Order;
+import fptu.ninhtbm.thebookshop.model.OrderItem;
 import fptu.ninhtbm.thebookshop.model.Publisher;
 import fptu.ninhtbm.thebookshop.model.Stock;
 
@@ -62,8 +63,6 @@ public class FirestoreActivity extends AppCompatActivity {
     }
 
     public void onTestFirestore(View view) {
-//        testFirestore();
-
         // SOME METHOD TO CALL FIRESTORE WITH EACH ROUTING
         getTopBookByField(5, "totalBookSelled");      // Rounting 1
 //        getTopBookByField(5, "createdAt");            // Rounting 1
@@ -88,12 +87,19 @@ public class FirestoreActivity extends AppCompatActivity {
 //        getAllBookByCategoryID("zna5C9ZCKki5V8L97LZn");  // Rounting 5
 //        getAllCategory();     // Rounting 5
 
-//        addAccountAndCustomerInfo(new Account("King123", "123456"), new Customer("King Wisdom", "Hòa Lạc",  "kingwisdom.dev@gmail.com", "0337220922"));  // Rounting 8
-
 //        getCustomerInfoByLogin("account13", "account13");  // Rounting 7
 
-//        updatePassword("FeuU4tA9sjd5eCQkn8UF", "123456", "account12");  // Rounting 10
+//        addAccountAndCustomerInfo(new Account("King123", "123456"), new Customer("King Wisdom", "Hòa Lạc",  "kingwisdom.dev@gmail.com", "0337220922"));  // Rounting 8
 
+//        List<BookSelected> bookSelectedList = new ArrayList<>(); ..... data lấy từ cart
+//        double totalAmount = 0;
+//        for (int i = 0; i < bookSelectedList.size(); i++) {
+//            totalAmount += bookSelectedList.get(i).getQuantity() * ((Book)bookSelectedList.get(i).getBookID()).getPrice() * (1 - (((Book)bookSelectedList.get(i).getBookID()).getDiscount() / 100));
+//        }
+//
+//        checkoutCart(bookSelectedList, new Order(db.collection("Customer").document("AnBBxrKJHzceljqhhTtr"), db.collection("OrderStatus").document("cSqT4qJKoZjMdvdVNSvi"), new Timestamp(new Date()), totalAmount, "King Wisdom", "0337220922", "Hoa Lac City")); //Rounting 9
+
+//        updatePassword("FeuU4tA9sjd5eCQkn8UF", "123456", "account12");  // Rounting 10
     }
 
     private void logListData(List list){
@@ -101,43 +107,6 @@ public class FirestoreActivity extends AppCompatActivity {
         for (int i = 0; i < list.size(); i++){
             Log.d(TAG, "Item " + i + " : " + list.get(i).toString());
         }
-    }
-
-    private void testFirestore() {
-//        DocumentReference docRef = db.collection("Account").document("5jDFIM3oQMmfsQIWFBOa");
-//        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//            @Override
-//            public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                Account author = documentSnapshot.toObject(Account.class);
-//                author.setId(documentSnapshot.getId());
-//                Log.d("Firestore", author.toString());
-//                Log.d("Firestore", String.valueOf(documentSnapshot.getData()));
-////                Log.d("Firestore", documentSnapshot.getId());
-////                Log.d("Firestore", author.getPassword());
-////                Log.d("Firestore", author.getCreatedAt().toString());
-////                Log.d("Firestore", author.isStatus() + "");
-//            }
-//        });
-
-
-        DocumentReference docRef = db.collection("Account").document("5jDFIM3oQMmfsQIWFBOa");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d("Firestore", "DocumentSnapshot data: " + document.getData());
-                        Log.d("Firestore", "DocumentSnapshot data1: " + (document.toObject(Account.class)).toString());
-                    } else {
-                        Log.d("Firestore", "No such document");
-                    }
-                } else {
-                    Log.d("Firestore", "get failed with ", task.getException());
-                }
-            }
-        });
-
     }
 
     // ====================================> Rounting 1: Home Page <==========================================
@@ -642,7 +611,13 @@ public class FirestoreActivity extends AppCompatActivity {
                                                                         if(index == bookSelectedDocs.getDocuments().size() - 1) {
                                                                             logListData(bookSelectedList);
 //                                                                            ( (Button)findViewById(R.id.btnTestFirestore)).setText(bookSelectedList.size() + "xx");
-                                                                            getFirstBookUnAvailabeToSell(bookSelectedList);
+
+//                                                                            double totalAmount = 0;
+//                                                                            for (int i = 0; i < bookSelectedList.size(); i++) {
+//                                                                                totalAmount += bookSelectedList.get(i).getQuantity() * ((Book)bookSelectedList.get(i).getBookID()).getPrice() * (1 - (((Book)bookSelectedList.get(i).getBookID()).getDiscount() / 100));
+//                                                                            }
+//
+//                                                                            checkoutCart(bookSelectedList, new Order(db.collection("Customer").document("AnBBxrKJHzceljqhhTtr"), db.collection("OrderStatus").document("cSqT4qJKoZjMdvdVNSvi"), new Timestamp(new Date()), totalAmount, "King Wisdom", "0337220922", "Hoa Lac City"));
                                                                         }
                                                                     }
                                                                 });
@@ -838,47 +813,10 @@ public class FirestoreActivity extends AppCompatActivity {
     // ====================================> Rounting 9: Checkout cart <==========================================
     // Checkout all book in cart and do some logic
     private void checkoutCart (List<BookSelected> bookSelectedList, Order order) {
-        // Check quantity in stock of all book in cart
-        if (bookSelectedList.size() > 0) {
-
-        } else {
-            Log.d(TAG, "Vui lòng chọn sản phẩm để thực hiện thanh toán!");
-        }
-    }
-//    const checkoutCart = async (db, cart, order) => {
-//            const firstBookUnAvailable = await getFirstBookUnAvailabeToSell(db, cart);
-//            if (firstBookUnAvailable == null) {
-//                // Thêm order mới
-//                const orderDocAdded = await addOrder(db, order);
-//                const orderId = orderDocAdded.id;
-//
-//                // Thêm orderitem mới
-//                for (let i = 0; i < cart.length; i++) {
-//                    const item = cart[i];
-//                    const orderItem = new OrderItem(null, doc(db, "Book", item.bookData.bookId), doc(db, "Order", orderId), item.quantity, item.bookData.price, item.bookData.discount);
-//                    await addOrderItem(db, orderItem);
-//                }
-//                // Cập nhật totalBookSelled cho Book và quantity cho Stock
-//                await updateQuantityBook(db, cart);
-//
-//                // Xóa các item trong cart vừa checkout
-//                for (let i = 0; i < cart.length; i++) {
-//                    const item = cart[i];
-//                    await deleteBookSelectedByID(db, item.id);
-//                }
-//                console.log("Đủ bán")
-//            } else {
-//                console.log("Sách trong kho không đủ để bán", firstBookUnAvailable)
-//            }
-//    }
-
-
-    // Check book in stock is available or not to checkout,
-    // If not available return first bookInfo unavailable, otherwise return null
-    private void getFirstBookUnAvailabeToSell (List<BookSelected> bookSelectedList) {
         Task t1 = db.collection("Book").get();
         Task t2 = db.collection("Stock").get();
 
+        // Check book in stock is available or not to checkout,
         Task combinedTask = Tasks.whenAllSuccess(t1, t2).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
             @Override
             public void onSuccess(List<Object> list) {
@@ -913,7 +851,18 @@ public class FirestoreActivity extends AppCompatActivity {
                 }
 
                 if (canCheckout) {
+                    // Thêm order mới và orderItem mới
+                    addOrderAndOrderItem(bookSelectedList, order);
 
+                    // Cập nhật totalBookSelled cho Book và quantity cho Stock
+                    updateQuantityBook(bookSelectedList);
+
+                    // Xóa các item trong cart vừa checkout
+                    for (int i = 0; i < bookSelectedList.size(); i++) {
+                        BookSelected item = bookSelectedList.get(i);
+                        deleteBookSelectedByID(item.getId());
+                    }
+                    Log.d(TAG, "Thanh toán thành công.");
                 } else {
                     Log.d(TAG, "Số lượng trong kho không đủ.");
                 }
@@ -925,7 +874,111 @@ public class FirestoreActivity extends AppCompatActivity {
             }
         });
     }
-    
+
+    // Add new doc with autogenerate ID with orderConverter
+    private void addOrderAndOrderItem (List<BookSelected> bookSelectedList, Order order) {
+        Map<String, Object> orderAdd = new HashMap<>();
+        orderAdd.put("customerID", order.getCustomerID());
+        orderAdd.put("orderStatusID", order.getOrderStatusID());
+        orderAdd.put("orderDate", order.getOrderDate());
+        orderAdd.put("totalAmount", order.getTotalAmount());
+        orderAdd.put("buyerFullname", order.getBuyerFullname());
+        orderAdd.put("buyerPhone", order.getBuyerPhone());
+        orderAdd.put("buyerAddress", order.getBuyerAddress());
+
+        db.collection("Order")
+                .add(orderAdd)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        if(task.isSuccessful()){
+                            DocumentReference orderDoc = task.getResult();
+                            Log.d(TAG, "Added Order with ID: " + orderDoc.getId());
+
+                            // Thêm nhiều orderitem mới
+                            for (int i = 0; i < bookSelectedList.size(); i++) {
+                                BookSelected item = bookSelectedList.get(i);
+                                OrderItem orderItem = new OrderItem(db.collection("Book").document(((Book)item.getBookID()).getId()), db.collection("Order").document(orderDoc.getId()), item.getQuantity(), ((Book)item.getBookID()).getPrice(), ((Book)item.getBookID()).getDiscount());
+                                addOrderItem(orderItem);
+                            }
+                        }
+                    }
+                });
+    }
+
+    private void addOrderItem (OrderItem orderItem) {
+        Map<String, Object> orderItemAdd = new HashMap<>();
+        orderItemAdd.put("bookID", orderItem.getBookID());
+        orderItemAdd.put("orderID", orderItem.getOrderID());
+        orderItemAdd.put("quantity", orderItem.getQuantity());
+        orderItemAdd.put("sellPrice", orderItem.getSellPrice());
+        orderItemAdd.put("discount", orderItem.getDiscount());
+        db.collection("OrderItem")
+                .add(orderItemAdd)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        if(task.isSuccessful()){
+                            DocumentReference orderItemDoc = task.getResult();
+                            Log.d(TAG, "Added OrderItem with ID: " + orderItemDoc.getId());
+                        }
+                    }
+                });
+    }
+
+    // Update totalBookSelled with each book checkout and quantity in Stock
+    private void updateQuantityBook (List<BookSelected> bookSelectedList) {
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                List<Book> newBookUpdate = new ArrayList<>();
+                for (int i = 0; i < bookSelectedList.size(); i++) {
+                    BookSelected item = bookSelectedList.get(i);
+                    DocumentReference bookDocRef = db.collection("Book").document(((Book)item.getBookID()).getId());
+                    DocumentSnapshot bookDoc = transaction.get(bookDocRef);
+                    long prevTotalBookSelled = (bookDoc.getLong("totalBookSelled") != null) ? bookDoc.getLong("totalBookSelled") : 0;
+
+                    DocumentReference stockRef = bookDoc.getDocumentReference("stockID");
+                    DocumentSnapshot stockDoc = transaction.get(stockRef);
+                    long prevQuantity = (stockDoc.getLong("quantity") != null) ? stockDoc.getLong("quantity") : 0;
+
+                    Book bookUpdate = new Book();
+                    bookUpdate.setId(bookDocRef.getId());
+                    bookUpdate.setTotalBookSelled((int)prevTotalBookSelled + item.getQuantity());
+                    Stock stock = new Stock();
+                    stock.setId(stockRef.getId());
+                    stock.setQuantity((int)prevQuantity - item.getQuantity());
+                    bookUpdate.setStockID(stock);
+
+                    newBookUpdate.add(bookUpdate);
+                }
+
+                // Update new totalBookSelled for Books and quantity for Stocks
+                for (int i = 0; i < newBookUpdate.size(); i++) {
+                    Book item = newBookUpdate.get(i);
+                    transaction.update(db.collection("Book").document(item.getId()), "totalBookSelled", item.getTotalBookSelled() );
+                    Log.d(TAG, "Updated Book ID " + item.getId());
+
+                    transaction.update(db.collection("Stock").document(((Stock)item.getStockID()).getId()), "quantity", ((Stock)item.getStockID()).getQuantity(), "updatedDate", new Timestamp(new Date()));
+                    Log.d(TAG, "Updated Stock ID " + ((Stock)item.getStockID()).getId());
+                }
+
+                // Success
+                return null;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Transaction update totalBookSelled successfully committed!");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Transaction update totalBookSelled failed: ", e);
+            }
+        });
+    }
+
 //    private void getFirstBookUnAvailabeToSell (List<BookSelected> bookSelectedList) {
 //        final boolean[] needCheckNextItem = {true};
 //        for (int i = 0; i < bookSelectedList.size(); i++) {

@@ -15,6 +15,16 @@ public class Order {
     public Order() {
     }
 
+    public Order(Object customerID, Object orderStatusID, Timestamp orderDate, double totalAmount, String buyerFullname, String buyerPhone, String buyerAddress) {
+        this.customerID = customerID;
+        this.orderStatusID = orderStatusID;
+        this.orderDate = orderDate;
+        this.totalAmount = totalAmount;
+        this.buyerFullname = buyerFullname;
+        this.buyerPhone = buyerPhone;
+        this.buyerAddress = buyerAddress;
+    }
+
     public Order(String id, Object customerID, Object orderStatusID, Timestamp orderDate, double totalAmount, String buyerFullname, String buyerPhone, String buyerAddress) {
         this.id = id;
         this.customerID = customerID;
