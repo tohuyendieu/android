@@ -14,6 +14,7 @@
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/bg_corner_login_panel.xml" value="0.2703125" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/bg_corner_panel.xml" value="0.2188034188034188" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/bg_gradient_primary.xml" value="0.2703125" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/bg_preview.xml" value="0.22179487179487178" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/bg_round_corner_search_box.xml" value="0.24027777777777778" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/bg_round_sighup_panel.xml" value="0.2703125" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/br_circle.xml" value="0.24027777777777778" />
@@ -27,22 +28,28 @@
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/ic_search_circle_red.xml" value="0.24027777777777778" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/item_slider_banner.xml" value="0.24027777777777778" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/selector_stock_icon.xml" value="0.2188034188034188" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/selector_type_sort_price.xml" value="0.22179487179487178" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/splash_background.xml" value="0.2703125" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_account.xml" value="0.264" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_book_detail.xml" value="0.264" />
-        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_cart.xml" value="0.25416666666666665" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_cart.xml" value="0.6" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_change_password.xml" value="0.264" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_checkout.xml" value="0.4" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_forgot_password.xml" value="0.264" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_list_book.xml" value="0.264" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_login.xml" value="0.264" />
-        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_main.xml" value="0.291866028708134" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_sigh_up.xml" value="0.25416666666666665" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_splash.xml" value="0.19814814814814816" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/bg_corner_panel_login.xml" value="0.19814814814814816" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/header.xml" value="0.264" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/header_navigation_drawer.xml" value="0.264" />
-        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/item_book.xml" value="0.5924170616113744" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/item_book.xml" value="0.536" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/item_book_preview.xml" value="0.536" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/item_slider_banner.xml" value="0.19814814814814816" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/row_item_cart.xml" value="0.4" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/side_navigation.xml" value="0.20854700854700856" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/sub_header.xml" value="0.25416666666666665" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/menu/navigation_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2703125" />

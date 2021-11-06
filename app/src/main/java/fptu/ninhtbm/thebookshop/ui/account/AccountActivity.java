@@ -16,11 +16,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import fptu.ninhtbm.thebookshop.R;
 import fptu.ninhtbm.thebookshop.library.SharePreferencesUtils;
 import fptu.ninhtbm.thebookshop.library.WidgetUtils;
+import fptu.ninhtbm.thebookshop.model.Customer;
 import fptu.ninhtbm.thebookshop.ui.changepassword.ChangePasswordActivity;
 import fptu.ninhtbm.thebookshop.ui.login.LoginActivity;
 
 public class AccountActivity extends AppCompatActivity {
 
+    private Customer mCustomer;
     private ConstraintLayout mMainLayout;
     private final ActivityResultLauncher<Intent> changePasswordResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -85,7 +87,15 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        // todo: call firestore get information
+        mCustomer = new SharePreferencesUtils(getApplicationContext()).getAccountCustomer();
+        if (mCustomer == null) {
+            WidgetUtils.showSnackbar(mMainLayout, R.string.txt_load_account_failure);
+            return;
+        }
+        mTextName.setText(mCustomer.getName());
+        mTextPhone.setText(mCustomer.getPhone());
+        mTextAddress.setText(mCustomer.getAddress());
+        mTextEmail.setText(mCustomer.getMail());
     }
 
     private void onEdit(View view) {
@@ -116,6 +126,10 @@ public class AccountActivity extends AppCompatActivity {
             mTextAddress.setVisibility(View.GONE);
             mTextPhone.setVisibility(View.GONE);
             mTextName.setVisibility(View.GONE);
+            mEdtName.setText(mCustomer.getName());
+            mEdtPhone.setText(mCustomer.getPhone());
+            mEdtAddress.setText(mCustomer.getAddress());
+            mEdtEmail.setText(mCustomer.getMail());
             isEditing = true;
         }
     }

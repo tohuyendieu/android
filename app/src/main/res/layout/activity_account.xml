@@ -57,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:inputType="textNoSuggestions"
             android:visibility="gone"
             app:layout_constraintStart_toEndOf="@id/img_account"
             app:layout_constraintTop_toTopOf="parent"
@@ -66,6 +67,7 @@
             android:id="@+id/edt_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="phone"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:visibility="gone"
@@ -79,6 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+
             app:layout_constraintStart_toEndOf="@id/img_account"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Trịnh Bá Minh Ninh" />
@@ -127,6 +130,7 @@
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
             android:textSize="20sp"
             android:visibility="gone"
             tools:text="ao@thatday.com" />
@@ -149,6 +153,7 @@
             android:id="@id/edt_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textNoSuggestions"
             android:textSize="20sp"
             android:visibility="gone"
             tools:text="viet nam" />

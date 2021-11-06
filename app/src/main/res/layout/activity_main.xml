@@ -5,13 +5,14 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_grey"
     tools:context=".ui.home.MainActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:openDrawer="start">
+        tools:openDrawer="end">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -58,23 +59,24 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_preview"
+                        android:paddingBottom="8dp">
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/card_image_best_sale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="24dp"
-                            android:layout_marginEnd="8dp"
+                            android:layout_margin="8dp"
                             android:elevation="0dp"
                             app:cardCornerRadius="50dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:src="@drawable/section_icon"
                                 tools:ignore="ContentDescription" />
                         </androidx.cardview.widget.CardView>
@@ -96,10 +98,11 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:text="@string/txt_vew_all_book"
+                            android:visibility="gone"
                             app:layout_constraintTop_toBottomOf="@+id/card_image_best_sale" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rc_list_best_sale_book"
+                            android:id="@+id/rc_book_best_sale"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -111,23 +114,24 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_preview"
+                        android:paddingBottom="8dp">
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/card_image_top_new"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="24dp"
-                            android:layout_marginEnd="8dp"
+                            android:layout_margin="8dp"
                             android:elevation="0dp"
                             app:cardCornerRadius="50dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:src="@drawable/section_icon"
                                 tools:ignore="ContentDescription" />
                         </androidx.cardview.widget.CardView>
@@ -149,6 +153,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:text="@string/txt_vew_all_book"
+                            android:visibility="gone"
                             app:layout_constraintTop_toBottomOf="@+id/card_image_top_new" />
 
                         <androidx.recyclerview.widget.RecyclerView
@@ -164,23 +169,24 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_preview"
+                        android:paddingBottom="8dp">
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/card_image_top_rate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="24dp"
-                            android:layout_marginEnd="8dp"
+                            android:layout_margin="8dp"
                             android:elevation="0dp"
                             app:cardCornerRadius="50dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:src="@drawable/section_icon"
                                 tools:ignore="ContentDescription" />
                         </androidx.cardview.widget.CardView>
@@ -202,10 +208,11 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:text="@string/txt_vew_all_book"
+                            android:visibility="gone"
                             app:layout_constraintTop_toBottomOf="@+id/card_image_top_rate" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rc_list_top_rate_book"
+                            android:id="@+id/rc_book_top_rate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -217,23 +224,24 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_preview"
+                        android:paddingBottom="8dp">
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/card_image_top_sale_off"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="24dp"
-                            android:layout_marginEnd="8dp"
+                            android:layout_margin="8dp"
                             android:elevation="0dp"
                             app:cardCornerRadius="50dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:src="@drawable/section_icon"
                                 tools:ignore="ContentDescription" />
                         </androidx.cardview.widget.CardView>
@@ -255,6 +263,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:text="@string/txt_vew_all_book"
+                            android:visibility="gone"
                             app:layout_constraintTop_toBottomOf="@+id/card_image_top_sale_off" />
 
                         <androidx.recyclerview.widget.RecyclerView
