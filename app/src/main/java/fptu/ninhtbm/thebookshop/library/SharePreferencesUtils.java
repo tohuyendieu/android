@@ -32,8 +32,10 @@ public class SharePreferencesUtils {
 
     public Customer getAccountCustomer() {
         Customer customer = new Gson().fromJson(mSharedPreferences.getString(Constants.CUSTOMER_ACCOUNT_KEY, Constants.EMPTY), Customer.class);
-        Account account = new Gson().fromJson(customer.getAccountID().toString(), Account.class);
-        customer.setAccountID(account);
+        if(customer != null) {
+            Account account = new Gson().fromJson(customer.getAccountID().toString(), Account.class);
+            customer.setAccountID(account);
+        }
         return customer;
     }
 
