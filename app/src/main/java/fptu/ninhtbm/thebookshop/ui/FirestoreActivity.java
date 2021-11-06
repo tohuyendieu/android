@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,6 +37,8 @@ import java.util.concurrent.Executors;
 
 import fptu.ninhtbm.thebookshop.R;
 import fptu.ninhtbm.thebookshop.model.Account;
+import fptu.ninhtbm.thebookshop.model.AuthorBook;
+import fptu.ninhtbm.thebookshop.model.Author;
 import fptu.ninhtbm.thebookshop.model.Book;
 import fptu.ninhtbm.thebookshop.model.BookSelected;
 import fptu.ninhtbm.thebookshop.model.Cart;
@@ -64,14 +64,14 @@ public class FirestoreActivity extends AppCompatActivity {
 
     public void onTestFirestore(View view) {
         // SOME METHOD TO CALL FIRESTORE WITH EACH ROUTING
-        getTopBookByField(5, "totalBookSelled");      // Rounting 1
+//        getTopBookByField(5, "totalBookSelled");      // Rounting 1
 //        getTopBookByField(5, "createdAt");            // Rounting 1
 //        getTopBookByField(5, "avgRated");             // Rounting 1
 //        getTopBookByField(5, "discount");             // Rounting 1
 
 //        getCustomerByID("4yMOdgrzNcdLU2quUk7A"); // Rounting 2
 
-         updateCustomer("4yMOdgrzNcdLU2quUk7A", new Customer(db.collection("Account").document("Uzmf3Mj04ugmGU7kb0eb"), "Trương Thị Huệ", "số 64b-Lê Văn Chí-Linh Trung-Thủ Đức-Tp.Hồ Chí Minh", "hue@gmail.com", "0937249516")); // Rounting 2.1
+//         updateCustomer("4yMOdgrzNcdLU2quUk7A", new Customer(db.collection("Account").document("Uzmf3Mj04ugmGU7kb0eb"), "Trương Thị Huệ", "số 64b-Lê Văn Chí-Linh Trung-Thủ Đức-Tp.Hồ Chí Minh", "hue@gmail.com", "0937249516")); // Rounting 2.1
 
 //         getBookByID("0oRxIqalaGZGgWl6H4Ld"); // Rounting 3
 
@@ -81,8 +81,8 @@ public class FirestoreActivity extends AppCompatActivity {
 //        getCommentedInBook("0oRxIqalaGZGgWl6H4Ld" ,"4yMOdgrzNcdLU2quUk7A");   //Rounting 3
 //        addBookSelected(new BookSelected(db.collection("Book").document("123"), db.collection("Cart").document("234"), 1, new Timestamp(new Date())));
 //        addBookToCart("AnBBxrKJHzceljqhhTtr", "5b1RnyIOPla1RvNw4cip");    //Rounting 3
-        getAllBookSelectedByCustomerID("AnBBxrKJHzceljqhhTtr");       //Rounting 3
-
+//        getAllBookSelectedByCustomerID("AnBBxrKJHzceljqhhTtr");       //Rounting 3
+        getAllAuthorByBookID("0oRxIqalaGZGgWl6H4Ld");
 
 //        getAllBookByCategoryID("zna5C9ZCKki5V8L97LZn");  // Rounting 5
 //        getAllCategory();     // Rounting 5
@@ -217,6 +217,57 @@ public class FirestoreActivity extends AppCompatActivity {
     // ====================================> Rounting 2.1: End Edit Customer Info <==========================================
 
     // ====================================> Rounting 3: Book Detail <==========================================
+
+    private void getAllAuthorByBookID (String bookID) {
+        db.collection("AuthorBook")
+                .whereEqualTo("bookID", db.collection("Book").document(bookID))
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            QuerySnapshot authorBookDocs = task.getResult();
+                            if(authorBookDocs.getDocuments().size() > 0) {
+                                List<Author> authorList = new ArrayList<>();
+
+                                for (int i = 0; i < authorBookDocs.getDocuments().size(); i++) {
+                                    final int index = i;
+                                    AuthorBook authorBook = authorBookDocs.getDocuments().get(index).toObject(AuthorBook.class);
+                                    authorBook.setId(authorBookDocs.getDocuments().get(index).getId());
+                                    ((DocumentReference)authorBook.getAuthorID())
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                    if(task.isSuccessful()){
+                                                        DocumentSnapshot doc = task.getResult();
+                                                        if(doc.exists()){
+                                                            Author author = doc.toObject(Author.class);
+                                                            author.setId(doc.getId());
+
+                                                            authorList.add(author);
+                                                        } else {
+                                                            Log.d(TAG, "Không tìm thấy thông tin Author ID: " + ((DocumentReference)authorBook.getBookID()).getId());
+                                                        }
+                                                    } else {
+                                                        Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                                                    }
+                                                    // Return data if end for loop
+                                                    if(index == authorBookDocs.getDocuments().size() - 1) {
+                                                        logListData(authorList);
+                                                    }
+                                                }
+                                            });
+                                }
+                            } else {
+                                Log.d(TAG, "Không tìm thấy thông tin tác giả!");
+                            }
+                        } else {
+                            Log.d(TAG, "Có lỗi xảy ra: " + task.getException());
+                        }
+                    }
+                });
+    }
 
     // Get Book by ID with converter
     private void getBookByID (String bookID){

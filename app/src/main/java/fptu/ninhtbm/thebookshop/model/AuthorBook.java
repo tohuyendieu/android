@@ -1,8 +1,9 @@
 package fptu.ninhtbm.thebookshop.model;
 
 public class AuthorBook {
-    private String authorID;
-    private String bookID;
+    private String id;
+    private Object authorID;
+    private Object bookID;
 
     public AuthorBook() {
     }
@@ -12,27 +13,42 @@ public class AuthorBook {
         this.bookID = bookID;
     }
 
-    public String getAuthorID() {
+    public AuthorBook(String id, String authorID, String bookID) {
+        this.id = id;
+        this.authorID = authorID;
+        this.bookID = bookID;
+    }
+
+    public Object getAuthorID() {
         return authorID;
     };
 
-    public void setAuthorID(String authorID) {
+    public void setAuthorID(Object authorID) {
         this.authorID = authorID;
     };
 
-    public String getBookID() {
+    public Object getBookID() {
         return bookID;
     };
 
-    public void setBookID(String bookID) {
+    public void setBookID(Object bookID) {
         this.bookID = bookID;
     };
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
         return "AuthorBook{" +
-                "authorID='" + authorID + '\'' +
-                ", bookID='" + bookID + '\'' +
+                "id='" + id + '\'' +
+                ", authorID=" + authorID +
+                ", bookID=" + bookID +
                 '}';
     }
 }
