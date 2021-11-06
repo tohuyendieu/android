@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fptu.ninhtbm.thebookshop.R;
+import fptu.ninhtbm.thebookshop.library.Validates;
 import fptu.ninhtbm.thebookshop.model.Account;
 import fptu.ninhtbm.thebookshop.model.Customer;
 import fptu.ninhtbm.thebookshop.ui.base.BasePresenter;
@@ -106,7 +107,7 @@ public class SignUpPresenter extends BasePresenter<ISignUpActivity> implements I
             return false;
         }
 
-        if(!validateEmail(email)) {
+        if(!Validates.validateEmail(email)) {
             mActivity.popSnackbarNotification(R.string.txt_noti_email_invalid);
             return false;
         }
@@ -121,37 +122,12 @@ public class SignUpPresenter extends BasePresenter<ISignUpActivity> implements I
             return false;
         }
 
-        if(!validNumeric(phone) || !validatePhone(phone)){
+        if(!Validates.validNumeric(phone) || !Validates.validatePhone(phone)){
             mActivity.popSnackbarNotification(R.string.txt_noti_phone_invalid);
             return false;
         }
 
         return true;
-    }
-
-    public boolean validateEmail(String value){
-        String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
-        if(value != null && !value.trim().equals("") && value.matches(EMAIL_REGEX)){
-            return true;
-        }
-        return false;
-    }
-
-    public boolean validNumeric(String value){
-        String NAME_REGEX = "[0-9]+";
-        if(value != null && !value.trim().equals("") && value.matches(NAME_REGEX)){
-            return true;
-        }
-        return false;
-    }
-
-    public boolean validatePhone(String value){
-        if(value != null && !value.trim().equals("")
-                && value.replaceAll("\\s+", "").length() >= 10
-                && value.replaceAll("\\s+", "").length() <= 15){
-            return true;
-        }
-        return false;
     }
 
 }

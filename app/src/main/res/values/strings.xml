@@ -33,6 +33,7 @@
     <string name="text_about_app">Thông tin ứng dụng</string>
     <string name="text_history_order">Lịch sử đặt hàng</string>
     <string name="text_noti_save_account_info_success">Sửa đổi thông tin cá nhân hoàn tất</string>
+    <string name="text_noti_save_account_info_error">Sửa đổi thông tin cá nhân thất bại</string>
     <string name="text_noti_change_password_success">Đổi mật khẩu thành công</string>
     <string name="txt_book_detail">Chi tiết sản phẩm</string>
     <string name="text_add_to_cart">Thêm vào giở hàng</string>
