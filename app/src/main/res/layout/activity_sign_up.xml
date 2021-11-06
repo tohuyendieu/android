@@ -2,10 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.signup.SignUpActivity">
-
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:trackColor="@color/important_button_color" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -22,7 +30,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox"
+        app:layout_constraintBottom_toTopOf="@+id/cb_confirm_service"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +38,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/text_layout_lastname"
+                android:id="@+id/text_layout_firstname"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -39,19 +47,19 @@
                 android:hint="@string/text_lastname"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:layout_constraintEnd_toStartOf="@id/text_layout_firstname"
+                app:layout_constraintEnd_toStartOf="@id/text_layout_lastname"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_lastname"
+                    android:id="@+id/edt_firstname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/text_layout_firstname"
+                android:id="@+id/text_layout_lastname"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -61,11 +69,11 @@
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/text_layout_lastname"
+                app:layout_constraintStart_toEndOf="@id/text_layout_firstname"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_firstname"
+                    android:id="@+id/edt_lastname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />
@@ -194,7 +202,7 @@
 
     <CheckBox
         android:buttonTint="@color/primary_color"
-        android:id="@+id/checkBox"
+        android:id="@+id/cb_confirm_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_agree_policy"

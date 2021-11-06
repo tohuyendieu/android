@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 
+import fptu.ninhtbm.thebookshop.model.Account;
 import fptu.ninhtbm.thebookshop.model.Customer;
 
 
@@ -30,7 +31,12 @@ public class SharePreferencesUtils {
     }
 
     public Customer getAccountCustomer() {
-        return new Gson().fromJson(mSharedPreferences.getString(Constants.CUSTOMER_ACCOUNT_KEY, Constants.EMPTY), Customer.class);
+        Customer customer = new Gson().fromJson(mSharedPreferences.getString(Constants.CUSTOMER_ACCOUNT_KEY, Constants.EMPTY), Customer.class);
+        if(customer != null) {
+            Account account = new Gson().fromJson(customer.getAccountID().toString(), Account.class);
+            customer.setAccountID(account);
+        }
+        return customer;
     }
 
     public void removeAccountCustomer() {

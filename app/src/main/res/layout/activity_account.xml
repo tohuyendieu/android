@@ -6,8 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient_primary"
-    tools:context=".ui.account.AccountActivity">
-
+    tools:context=".ui.account.AccountActivity"
+    android:fitsSystemWindows="true">
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:trackColor="@color/important_button_color" />
     <ImageButton
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
@@ -50,51 +58,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
-
-        <EditText
-            android:id="@+id/edt_name"
-            style="@style/Header1OnPrimary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:inputType="textNoSuggestions"
-            android:visibility="gone"
-            app:layout_constraintStart_toEndOf="@id/img_account"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Trịnh Bá Minh Ninh" />
-
-        <EditText
-            android:id="@+id/edt_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@+id/edt_name"
-            app:layout_constraintTop_toBottomOf="@id/edt_name"
-            tools:text="0987654321" />
-
         <TextView
-            android:id="@+id/text_name"
-            style="@style/Header1OnPrimary"
+            android:id="@+id/text_username"
+            style="@style/Header2OnPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
 
             app:layout_constraintStart_toEndOf="@id/img_account"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Trịnh Bá Minh Ninh" />
-
-        <TextView
-            android:id="@+id/text_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/text_name"
-            app:layout_constraintTop_toBottomOf="@id/text_name"
-            tools:text="0987654321" />
+            tools:text="username" />
 
         <ImageButton
             android:id="@+id/btn_edit"
@@ -113,7 +86,7 @@
         android:id="@+id/layout_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/bg_corner_panel"
         android:orientation="vertical"
         android:padding="16dp"
@@ -124,6 +97,50 @@
             style="@style/LabelBlack24"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Họ tên" />
+
+        <EditText
+            android:id="@+id/edt_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:visibility="gone"
+            tools:text="Tên hơi ảo" />
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            tools:text="Tên hơi ảo" />
+
+        <TextView
+            style="@style/LabelBlack24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Số điện thoại" />
+
+        <EditText
+            android:id="@+id/edt_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:visibility="gone"
+            tools:text="0123456789" />
+
+        <TextView
+            android:id="@+id/text_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            tools:text="0123456789" />
+
+        <TextView
+            style="@style/LabelBlack24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="Email" />
 
         <EditText
@@ -183,7 +200,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingStart="8dp"
-            android:paddingTop="24dp"
+            android:paddingTop="0dp"
             android:paddingEnd="8dp"
             android:paddingBottom="24dp">
 

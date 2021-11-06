@@ -33,6 +33,7 @@
     <string name="text_about_app">Thông tin ứng dụng</string>
     <string name="text_history_order">Lịch sử đặt hàng</string>
     <string name="text_noti_save_account_info_success">Sửa đổi thông tin cá nhân hoàn tất</string>
+    <string name="text_noti_save_account_info_error">Sửa đổi thông tin cá nhân thất bại</string>
     <string name="text_noti_change_password_success">Đổi mật khẩu thành công</string>
     <string name="txt_book_detail">Chi tiết sản phẩm</string>
     <string name="text_add_to_cart">Thêm vào giở hàng</string>
@@ -64,6 +65,14 @@
     <string name="txt_cart">Giỏ hàng</string>
     <string name="txt_load_caterory_error">Không tìm thấy danh mục sách tương ứng</string>
     <string name="txt_noti_loading_failure">Có lỗi. Xin vui lòng thử lại!</string>
+    <string name="txt_noti_create_account_success">Tạo tài khoản thành công!</string>
+    <string name="txt_noti_account_existed">Tài khoản đã tồn tại!</string>
+    <string name="txt_noti_enter_fields">Bạn phải điền đủ các trường thông tin.</string>
+    <string name="txt_noti_password_invalid">Mật khẩu tối thiểu 6 ký tự!</string>
+    <string name="txt_noti_email_invalid">Email không đúng định dạng. Vui lòng nhập lại!</string>
+    <string name="txt_noti_repass_invalid">Mật khẩu nhập lại không khớp!</string>
+    <string name="txt_noti_phone_invalid">Số điện thoại không đúng định dạng. Vui lòng nhập lại!</string>
+    <string name="txt_noti_username_invalid">Tài khoản tối thiểu 6 ký tự. Vui lòng nhập lại!</string>
     <string name="text_not_login_yet">Bạn chưa đăng nhập?</string>
     <string name="txt_string_greeting">Xin chào, %s</string>
     <string name="txt_load_account_failure">Thông tin tài khoản không tìm thấy, vui lòng thử lại sau</string>
