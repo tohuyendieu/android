@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -22,7 +21,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +36,7 @@ import fptu.ninhtbm.thebookshop.ui.login.LoginActivity;
 
 public class AccountActivity extends AppCompatActivity {
 
+    private Customer mCustomer;
     private ConstraintLayout mMainLayout;
     private final ActivityResultLauncher<Intent> changePasswordResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),

@@ -1,18 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_header_navigation"
+    android:fitsSystemWindows="true"
     android:paddingTop="40dp"
-    android:paddingBottom="40dp"
-    android:fitsSystemWindows="true">
+    android:paddingBottom="40dp">
 
     <TextView
+        android:id="@+id/text_greeting"
+        style="@style/TextBlack18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/txt_string_greeting" />
+
+    <TextView
+        android:id="@+id/label_login_nav_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/TextBlack18"
-        tools:text="Xin chào, Trịnh Bá Ninh Ninh"
+        android:text="@string/text_not_login_yet"
+        app:layout_constraintBottom_toTopOf="@+id/btn_login_nav_bar"
+        app:layout_constraintEnd_toEndOf="@+id/btn_login_nav_bar"
+        app:layout_constraintStart_toStartOf="@+id/btn_login_nav_bar" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login_nav_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/text_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -73,4 +73,7 @@
     <string name="txt_noti_repass_invalid">Mật khẩu nhập lại không khớp!</string>
     <string name="txt_noti_phone_invalid">Số điện thoại không đúng định dạng. Vui lòng nhập lại!</string>
     <string name="txt_noti_username_invalid">Tài khoản tối thiểu 6 ký tự. Vui lòng nhập lại!</string>
+    <string name="text_not_login_yet">Bạn chưa đăng nhập?</string>
+    <string name="txt_string_greeting">Xin chào, %s</string>
+    <string name="txt_load_account_failure">Thông tin tài khoản không tìm thấy, vui lòng thử lại sau</string>
 </resources>

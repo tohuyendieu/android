@@ -71,7 +71,7 @@ public class FirestoreActivity extends AppCompatActivity {
 
 //        getCustomerByID("4yMOdgrzNcdLU2quUk7A"); // Rounting 2
 
-//         updateCustomer("4yMOdgrzNcdLU2quUk7A", new Customer(db.collection("Account").document("Uzmf3Mj04ugmGU7kb0eb"), "Trương Thị Huệ", "số 64b-Lê Văn Chí-Linh Trung-Thủ Đức-Tp.Hồ Chí Minh", "hue@gmail.com", "0937249516")); // Rounting 2.1
+         updateCustomer("4yMOdgrzNcdLU2quUk7A", new Customer(db.collection("Account").document("Uzmf3Mj04ugmGU7kb0eb"), "Trương Thị Huệ", "số 64b-Lê Văn Chí-Linh Trung-Thủ Đức-Tp.Hồ Chí Minh", "hue@gmail.com", "0937249516")); // Rounting 2.1
 
 //         getBookByID("0oRxIqalaGZGgWl6H4Ld"); // Rounting 3
 
