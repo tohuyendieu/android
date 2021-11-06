@@ -64,7 +64,7 @@
     <string name="txt_profile">Trang cá nhân</string>
     <string name="txt_cart">Giỏ hàng</string>
     <string name="txt_load_caterory_error">Không tìm thấy danh mục sách tương ứng</string>
-    <string name="txt_noti_loading_failure">Có lỗi. Xin vui lòng thử lại!</string>
+    <string name="txt_noti_loading_failure">Có lỗi xảy ra. Xin vui lòng thử lại sau!</string>
     <string name="txt_noti_create_account_success">Tạo tài khoản thành công!</string>
     <string name="txt_noti_account_existed">Tài khoản đã tồn tại!</string>
     <string name="txt_noti_enter_fields">Bạn phải điền đủ các trường thông tin.</string>
@@ -76,4 +76,5 @@
     <string name="text_not_login_yet">Bạn chưa đăng nhập?</string>
     <string name="txt_string_greeting">Xin chào, %s</string>
     <string name="txt_load_account_failure">Thông tin tài khoản không tìm thấy, vui lòng thử lại sau</string>
+    <string name="txt_noti_password_error">Mật khẩu đăng nhập không đúng. Vui lòng kiểm tra lại!</string>
 </resources>
