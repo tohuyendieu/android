@@ -234,10 +234,8 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
     private void logout() {
         SharePreferencesUtils sharePref = new SharePreferencesUtils(this);
         sharePref.removeAccountCustomer();
-        Intent i = new Intent(MainActivity.this, LoginActivity.class);
-        // set the new task and clear flags
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(i);
+        mCustomer = null;
+        setUpNavigationDrawer();
     }
 
     private void setUpNavigationDrawer(){
@@ -262,6 +260,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     @SuppressLint("NotifyDataSetChanged")
     private void onLoadData() {
+        mCustomer = new SharePreferencesUtils(getApplicationContext()).getAccountCustomer();
         setUpNavigationDrawer();
         mPresenter.loadAllCategories();
         mPresenter.loadTopBookByField(NUMBER_BOOK_IN_PREVIEW, Constants.TYPE_SORT_BEST_SALE);

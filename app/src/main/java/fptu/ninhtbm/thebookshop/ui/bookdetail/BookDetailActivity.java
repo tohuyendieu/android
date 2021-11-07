@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
@@ -133,6 +134,12 @@ public class BookDetailActivity extends AppCompatActivity implements IBookDetail
     private void setListener() {
         ImageButton btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(v -> finish());
+        mSwipeContainer.setOnRefreshListener(() -> {
+            mPresenter.loadBookById(mBook.getId());
+            Handler handler = new Handler();
+            final Runnable r = () -> mSwipeContainer.setRefreshing(false);
+            handler.postDelayed(r, 2000);
+        });
         mBtnShowMoreBookDescription.setOnClickListener(v -> {
             if (isBookDescriptionExpanded) {
                 isBookDescriptionExpanded = false;
@@ -249,15 +256,19 @@ public class BookDetailActivity extends AppCompatActivity implements IBookDetail
         if (authorList.size() == 1) {
             Author author = authorList.get(0);
             mTextAuthor.setText(author.getName());
-            mTextAuthorDescription.setText(author.getDescription());
+            if (!TextUtils.isEmpty(author.getDescription())) {
+                mTextAuthorDescription.setText(author.getDescription());
+            }
 
         } else {
             List<String> authorName = new ArrayList<>();
             String allDescription = "";
             for (Author a : authorList) {
                 authorName.add(a.getName());
-                allDescription += a.getName();
-                allDescription += "\n" + a.getDescription() + "\n\n\n";
+                if (!TextUtils.isEmpty(a.getDescription())) {
+                    allDescription += a.getName();
+                    allDescription += "\n" + a.getDescription() + "\n\n\n";
+                }
             }
             String result = String.join(",", authorName);
             mTextAuthor.setText(result);

@@ -87,5 +87,6 @@
     <string name="txt_add_to_cart_login_required">Bạn phải đăng nhập trước khi thêm vào giỏ hàng</string>
     <string name="txt_rated_success">Đánh giá sản phẩm thành công</string>
     <string name="txt_author_not_found">Không tìm thấy thông tin tác giả!</string>
+    <string name="txt_book_not_found_by_category">Không tìm thấy thông tin sách tương ứng</string>
     <!--    <string name="txt_string_strikethrough">%s</string>-->
 </resources>
