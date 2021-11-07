@@ -36,7 +36,7 @@
     <string name="text_noti_save_account_info_error">Sửa đổi thông tin cá nhân thất bại</string>
     <string name="text_noti_change_password_success">Đổi mật khẩu thành công</string>
     <string name="txt_book_detail">Chi tiết sản phẩm</string>
-    <string name="text_add_to_cart">Thêm vào giở hàng</string>
+    <string name="text_add_to_cart">Thêm vào giỏ hàng</string>
     <string name="txt_publisher">Nhà xuất bản</string>
     <string name="txt_publisher_date">Ngày xuất bản</string>
     <string name="txt_total_page">Số trang</string>
@@ -59,6 +59,7 @@
     <string name="txt_account_or_password_not_match">Tên tài khoản hoặc mật khẩu sai!</string>
     <string name="text_address">Địa chỉ</string>
     <string name="txt_view_more">Xem thêm</string>
+    <string name="txt_view_less">Thu gọn</string>
     <string name="txt_author_description">Đôi nét về tác giả</string>
     <string name="txt_rate">Đánh giá</string>
     <string name="txt_profile">Trang cá nhân</string>
@@ -77,4 +78,14 @@
     <string name="txt_string_greeting">Xin chào, %s</string>
     <string name="txt_load_account_failure">Thông tin tài khoản không tìm thấy, vui lòng thử lại sau</string>
     <string name="txt_noti_password_error">Mật khẩu đăng nhập không đúng. Vui lòng kiểm tra lại!</string>
+    <string name="txt_string_book_sold">Đã bán %s quyển</string>
+    <string name="txt_in_stock">Còn sẵn</string>
+    <string name="txt_out_of_stock">Hết hàng</string>
+    <string name="txt_no_rate">Chưa có đánh giá</string>
+    <string name="txt_update_cart_success">Cập nhật giỏ hàng thành công</string>
+    <string name="txt_add_to_cart_success">Thêm sách vào Giỏ hàng thành công!</string>
+    <string name="txt_add_to_cart_login_required">Bạn phải đăng nhập trước khi thêm vào giỏ hàng</string>
+    <string name="txt_rated_success">Đánh giá sản phẩm thành công</string>
+    <string name="txt_author_not_found">Không tìm thấy thông tin tác giả!</string>
+    <!--    <string name="txt_string_strikethrough">%s</string>-->
 </resources>

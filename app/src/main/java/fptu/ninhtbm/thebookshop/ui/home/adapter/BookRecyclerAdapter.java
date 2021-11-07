@@ -46,6 +46,7 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
                 .into(holder.imgBook);
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, BookDetailActivity.class);
+            intent.putExtra(BookDetailActivity.BOOK_ID_KEY, book.getId());
             mContext.startActivity(intent);
         });
     }

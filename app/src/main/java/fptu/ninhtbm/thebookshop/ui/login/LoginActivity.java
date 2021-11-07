@@ -1,5 +1,6 @@
 package fptu.ninhtbm.thebookshop.ui.login;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import fptu.ninhtbm.thebookshop.ui.login.presenter.LoginPresenter;
 import fptu.ninhtbm.thebookshop.ui.signup.SignUpActivity;
 
 public class LoginActivity extends AppCompatActivity implements ILoginActivity {
+
+    public static final String IS_REQUEST_FROM_BOOK_DETAIL = "IS_REQUEST_FROM_BOOK_DETAIL";
 
     private TextInputLayout mInputLayoutUsername;
     private TextInputLayout mInputLayoutPassword;
@@ -77,7 +80,12 @@ public class LoginActivity extends AppCompatActivity implements ILoginActivity {
     }
 
     @Override
-    public void directToHome() {
+    public void returnLoginRequest() {
+        if(getIntent().getBooleanExtra(IS_REQUEST_FROM_BOOK_DETAIL, false)){
+            setResult(Activity.RESULT_OK);
+            finish();
+            return;
+        }
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

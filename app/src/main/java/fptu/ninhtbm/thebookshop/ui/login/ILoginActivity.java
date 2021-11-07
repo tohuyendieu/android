@@ -4,7 +4,7 @@ public interface ILoginActivity {
 
     void popSnackbarNotification(int messageResId);
 
-    void directToHome();
+    void returnLoginRequest();
 
     void setProgressLoading(boolean isLoading);
 }

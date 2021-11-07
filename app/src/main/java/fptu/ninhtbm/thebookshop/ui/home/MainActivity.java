@@ -133,6 +133,13 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         mCustomer = new SharePreferencesUtils(getApplicationContext()).getAccountCustomer();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mCustomer = new SharePreferencesUtils(getApplicationContext()).getAccountCustomer();
+        setUpNavigationDrawer();
+    }
+
     private void setUpAutoSlidingBanner() {
         mImageList = new ArrayList<>();
         mSliderBannerAdapter = new SliderBannerAdapter(this, mImageList);
@@ -233,8 +240,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         startActivity(i);
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private void onLoadData() {
+    private void setUpNavigationDrawer(){
         View headerNavigationView = mNavigationView.getHeaderView(0);
         TextView labelLogin = headerNavigationView.findViewById(R.id.label_login_nav_bar);
         MaterialButton btnLogin = headerNavigationView.findViewById(R.id.btn_login_nav_bar);
@@ -252,6 +258,11 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
             textGreeting.setVisibility(View.GONE);
             itemLogout.setVisible(false);
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private void onLoadData() {
+        setUpNavigationDrawer();
         mPresenter.loadAllCategories();
         mPresenter.loadTopBookByField(NUMBER_BOOK_IN_PREVIEW, Constants.TYPE_SORT_BEST_SALE);
         mPresenter.loadTopBookByField(NUMBER_BOOK_IN_PREVIEW, Constants.TYPE_SORT_NEW);
@@ -260,8 +271,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         // Todo: fake number badge in cart
         badgeDrawable.setVisible(true);
         badgeDrawable.setNumber(9);
-        mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/154/original/ABCH_Fall21_2048x600_Ad.jpg");
-        mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/156/original/The_Dawn_Of_Everything_-_Bookshop_-_2048x600.jpg");
+        mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/mobile_images/158/original/Winter_Recipes_-_640x180.jpg");
         mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/157/original/StrangerInTheLifeboat_2048x600_rev2_%281%29.jpg");
         mSliderBannerAdapter.notifyDataSetChanged();
     }

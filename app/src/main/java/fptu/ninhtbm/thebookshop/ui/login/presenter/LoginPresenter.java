@@ -3,7 +3,6 @@ package fptu.ninhtbm.thebookshop.ui.login.presenter;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import fptu.ninhtbm.thebookshop.R;
-import fptu.ninhtbm.thebookshop.library.Constants;
 import fptu.ninhtbm.thebookshop.library.SharePreferencesUtils;
 import fptu.ninhtbm.thebookshop.model.Account;
 import fptu.ninhtbm.thebookshop.model.Customer;
@@ -51,7 +50,7 @@ public class LoginPresenter extends BasePresenter<ILoginActivity> implements ILo
                                                     customer.setAccountID(account);
                                                     sharePreferencesUtils.saveAccountCustomer(customer);
 //                                                    sharePreferencesUtils.put(Constants.CUSTOMER_ACCOUNT_KEY, Customer.class);
-                                                    mActivity.directToHome();
+                                                    mActivity.returnLoginRequest();
 //                                                    Log.d(TAG, "Đăng nhập thành công!");
 //                                                    Log.d(TAG, customer.toString());
                                                 } else {

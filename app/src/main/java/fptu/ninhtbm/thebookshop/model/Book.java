@@ -1,8 +1,11 @@
 package fptu.ninhtbm.thebookshop.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.Timestamp;
 
-public class Book {
+public class Book implements Parcelable {
     private String id;
     private Object publisherID;
     private Object stockID;
@@ -39,6 +42,54 @@ public class Book {
         this.avgRated = avgRated;
         this.createdAt = createdAt;
     }
+
+    protected Book(Parcel in) {
+        id = in.readString();
+        title = in.readString();
+        price = in.readDouble();
+        discount = in.readDouble();
+        totalPage = in.readInt();
+        bookCoverImg = in.readString();
+        description = in.readString();
+        totalRating = in.readInt();
+        totalRatingStar = in.readInt();
+        totalBookSelled = in.readInt();
+        avgRated = in.readDouble();
+        createdAt = in.readParcelable(Timestamp.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(title);
+        dest.writeDouble(price);
+        dest.writeDouble(discount);
+        dest.writeInt(totalPage);
+        dest.writeString(bookCoverImg);
+        dest.writeString(description);
+        dest.writeInt(totalRating);
+        dest.writeInt(totalRatingStar);
+        dest.writeInt(totalBookSelled);
+        dest.writeDouble(avgRated);
+        dest.writeParcelable(createdAt, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel in) {
+            return new Book(in);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -159,6 +210,10 @@ public class Book {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     };
+
+    public double getSaleOffPrice(){
+        return price - price * discount / 100;
+    }
 
     @Override
     public String toString() {
