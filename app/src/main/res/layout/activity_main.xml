@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_grey"
-    tools:context=".ui.home.MainActivity">
+    tools:context=".ui.home.MainActivity"
+    android:fitsSystemWindows="true">
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"

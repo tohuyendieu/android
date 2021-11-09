@@ -68,7 +68,7 @@ public class FirestoreActivity extends AppCompatActivity {
 //        getTopBookByField(5, "createdAt");            // Rounting 1
 //        getTopBookByField(5, "avgRated");             // Rounting 1
 //        getTopBookByField(5, "discount");             // Rounting 1
-
+        searchBooksByTitle("t");   // Roungting 1
 //        getCustomerByID("4yMOdgrzNcdLU2quUk7A"); // Rounting 2
 
 //         updateCustomer("4yMOdgrzNcdLU2quUk7A", new Customer(db.collection("Account").document("Uzmf3Mj04ugmGU7kb0eb"), "Trương Thị Huệ", "số 64b-Lê Văn Chí-Linh Trung-Thủ Đức-Tp.Hồ Chí Minh", "hue@gmail.com", "0937249516")); // Rounting 2.1
@@ -82,9 +82,9 @@ public class FirestoreActivity extends AppCompatActivity {
 //        addBookSelected(new BookSelected(db.collection("Book").document("123"), db.collection("Cart").document("234"), 1, new Timestamp(new Date())));
 //        addBookToCart("AnBBxrKJHzceljqhhTtr", "5b1RnyIOPla1RvNw4cip");    //Rounting 3
 //        getAllBookSelectedByCustomerID("AnBBxrKJHzceljqhhTtr");       //Rounting 3
-        getAllAuthorByBookID("0oRxIqalaGZGgWl6H4Ld");
+//        getAllAuthorByBookID("0oRxIqalaGZGgWl6H4Ld");
 
-//        getAllBookByCategoryID("zna5C9ZCKki5V8L97LZn");  // Rounting 5
+//        getAllBookByCategoryID("IxqRTaBd63nRm9iamOL4");  // Rounting 5
 //        getAllCategory();     // Rounting 5
 
 //        getCustomerInfoByLogin("account13", "account13");  // Rounting 7
@@ -137,6 +137,41 @@ public class FirestoreActivity extends AppCompatActivity {
                     }
                 });
         };
+
+
+    // Get all Book has title with converter
+    private void searchBooksByTitle (String title) {
+        db.collection("Book")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            List<Book> allBook = new ArrayList<>();
+                            List<Book> searchBooks = new ArrayList<>();
+
+                            if(task.getResult().getDocuments().size() > 0) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Book book = document.toObject(Book.class);
+                                    book.setId(document.getId());
+                                    allBook.add(book);
+                                }
+                                for (int i = 0; i < allBook.size(); i++) {
+                                    if(allBook.get(i).getTitle().toLowerCase().contains(title.toLowerCase())){
+                                        searchBooks.add(allBook.get(i));
+                                    }
+                                }
+                                Log.d(TAG, "Kết quả tìm kiếm với \""+ title + "\": ");
+                                logListData(searchBooks);
+                            } else {
+                                Log.d(TAG, "Không tìm thấy thông tin sách tương ứng!");
+                            }
+                        } else {
+                            Log.d(TAG, "Có lỗi xảy ra: ", task.getException());
+                        }
+                    }
+                });
+    }
 
     // ====================================> Rounting 1: End Home Page <==========================================
 
@@ -695,7 +730,7 @@ public class FirestoreActivity extends AppCompatActivity {
     // Get all Book with CategoryID with converter
     private void getAllBookByCategoryID (String categoryID) {
         db.collection("Book")
-                .whereEqualTo("1ID", db.collection("Category").document(categoryID))
+                .whereEqualTo("categoryID", db.collection("Category").document(categoryID))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
