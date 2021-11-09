@@ -5,7 +5,8 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.listbook.ListBookActivity">
+    tools:context=".ui.listbook.ListBookActivity"
+    android:fitsSystemWindows="true">
 
 
     <include
