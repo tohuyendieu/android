@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_grey"
-    tools:context=".ui.checkout.CheckoutActivity"
     android:fitsSystemWindows="true">
+    android:id="@+id/layout_main"
+    tools:context=".ui.checkout.CheckoutActivity">
 
     <include
         android:id="@+id/header"
@@ -56,21 +57,16 @@
             android:layout_marginTop="24dp"
             android:text="@string/txt_name_checkout" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/edt_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:inputType="textNoSuggestions"
             android:backgroundTint="@color/important_button_color"
             app:boxStrokeColor="@color/important_button_color"
-            app:hintTextColor="@color/important_button_color">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textNoSuggestions" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:hintTextColor="@color/important_button_color"/>
 
         <TextView
             android:id="@+id/label_phone"
@@ -81,21 +77,16 @@
             android:layout_marginTop="8dp"
             android:text="@string/text_phone" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/edt_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:inputType="phone"
             android:backgroundTint="@color/important_button_color"
             app:boxStrokeColor="@color/important_button_color"
-            app:hintTextColor="@color/important_button_color">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="phone" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:hintTextColor="@color/important_button_color"/>
 
         <TextView
             android:id="@+id/label_address"
@@ -106,21 +97,16 @@
             android:layout_marginTop="8dp"
             android:text="@string/text_address" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/edt_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:inputType="textNoSuggestions"
             android:backgroundTint="@color/important_button_color"
             app:boxStrokeColor="@color/important_button_color"
-            app:hintTextColor="@color/important_button_color">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textNoSuggestions" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:hintTextColor="@color/important_button_color"/>
 
     </LinearLayout>
 
@@ -147,12 +133,12 @@
                 android:gravity="start|top"
                 android:text="@string/txt_total_cost"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/txt_total_cost"
+                app:layout_constraintBottom_toTopOf="@+id/text_total_cost"
                 app:layout_constraintEnd_toStartOf="@+id/btn_buy"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txt_total_cost"
+                android:id="@+id/text_total_cost"
                 style="@style/TextRed18"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

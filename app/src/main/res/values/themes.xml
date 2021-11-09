@@ -38,6 +38,10 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="TextBlack20">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 
     <style name="TextBlack18">
         <item name="android:textSize">18sp</item>
