@@ -14,4 +14,7 @@ public class Constants {
     public static final String DATE_DD_MM_YYYY = "dd-MM-yyy";
 
     public static final String NEW_LOGIN_REQUEST = "NEW_LOGIN";
+    public static final String STATUS_USER_ORDERED = "cSqT4qJKoZjMdvdVNSvi";
+    public static final String TABLE_ORDER_STATUS = "OrderStatus";
+
 }

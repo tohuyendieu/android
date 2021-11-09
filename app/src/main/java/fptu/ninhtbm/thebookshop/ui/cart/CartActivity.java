@@ -83,7 +83,6 @@ public class CartActivity extends AppCompatActivity implements ICartActivity {
 
     private void onBuy(View view) {
         Intent intent = new Intent(this, CheckoutActivity.class);
-        intent.putExtra(CheckoutActivity.CART_KEY, (Parcelable) mBookSelectedList);
         startActivity(intent);
     }
 

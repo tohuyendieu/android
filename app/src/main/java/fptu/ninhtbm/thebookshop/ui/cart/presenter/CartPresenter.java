@@ -40,7 +40,11 @@ public class CartPresenter extends BasePresenter<ICartActivity> implements ICart
                                         if(task1.isSuccessful()){
                                             QuerySnapshot bookSelectedDocs = task1.getResult();
                                             List<BookSelected> bookSelectedList = new ArrayList<>();
-
+                                            if( bookSelectedDocs.getDocuments().size() == 0){
+                                                bookSelectedList.sort(Comparator.comparing(BookSelected::getId));
+                                                mActivity.loadBookSelectedInCart(bookSelectedList);
+                                                return;
+                                            }
                                             for (int i = 0; i < bookSelectedDocs.getDocuments().size(); i++) {
                                                 final int index = i;
                                                 BookSelected bookSelected = bookSelectedDocs.getDocuments().get(index).toObject(BookSelected.class);
