@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,85 +8,93 @@
 
     <include
         android:id="@+id/header"
-        layout="@layout/header"
+        layout="@layout/sub_header"
         android:clipToPadding="false"
-        android:elevation="30dp" />
+        android:elevation="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:indeterminate="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:progressTint="@color/important_button_color" />
+    <TextView
+        android:id="@+id/text_cart_no_item"
+        android:layout_width="wrap_content"
+        style="@style/TextBlack18"
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/txt_cart_have_no_item"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_cart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/header">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/checkout_layout"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        tools:listitem="@layout/row_item_cart" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/checkout_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardElevation="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_cart">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="56dp"
+            android:paddingStart="16dp"
+            android:orientation="horizontal"
+            tools:ignore="RtlSymmetry">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_cart"
-                android:layout_width="match_parent"
-                android:layout_height="517dp"
-                android:layout_above="@+id/layout_price"
-                android:layout_below="@+id/header"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginBottom="8dp"
-                tools:listitem="@layout/row_item_cart" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="start|top"
+                android:paddingTop="8dp"
+                android:text="@string/txt_total_cost"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/text_total_cost"
+                style="@style/TextRed18"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="start|top"
+                android:paddingTop="8dp"
+                tools:text="69.000đ" />
+
+            <TextView
+                android:id="@+id/btn_buy"
+                style="@style/TextWhite18"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@color/important_button_color"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/txt_order" />
         </LinearLayout>
-    </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/layout_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="8dp"
-        android:orientation="vertical">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:weightSum="8">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:gravity="right"
-                    android:text="@string/txt_label_total"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/txt_final_price"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="right"
-                    android:text="@string/txt_label_total_price"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/btn_checkout"
-            style="@style/CornerButtonRed16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/txt_button_checkout"
-            android:textColor="@color/white" />
-    </LinearLayout>
-</RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

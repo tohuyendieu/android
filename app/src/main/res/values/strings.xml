@@ -88,5 +88,15 @@
     <string name="txt_rated_success">Đánh giá sản phẩm thành công</string>
     <string name="txt_author_not_found">Không tìm thấy thông tin tác giả!</string>
     <string name="txt_book_not_found_by_category">Không tìm thấy thông tin sách tương ứng</string>
+    <string name="txt_total_cost">Tổng tiền</string>
+    <string name="txt_order">Mua hàng</string>
+    <string name="txt_checkout">Đặt hàng</string>
+    <string name="txt_name_checkout">Tên người nhận</string>
+    <string name="txt_checkout_form_information">Địa chỉ nhận hàng</string>
+    <string name="txt_load_account_in_cart_fail">Vui lòng đăng nhập trước khi vào giỏ hàng</string>
+    <string name="txt_cart_not_found">Không tìm thấy thông tin Cart của Customer!</string>
+    <string name="txt_remove_book_selected_success">Xóa sản phẩm đã chọn thành công</string>
+    <string name="txt_quantity_change_success">Thay đổi số lượng thành công</string>
+    <string name="txt_cart_have_no_item">Không có sản phẩm nào trong giỏ hàng cả.\nBạn mua cái gì đó đi đã :3</string>
     <!--    <string name="txt_string_strikethrough">%s</string>-->
 </resources>

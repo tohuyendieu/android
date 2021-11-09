@@ -30,18 +30,26 @@
         tools:text="Tác phẩm" />
 
     <TextView
-        android:id="@+id/text_price"
-        style="@style/TextRed20"
-        android:layout_width="0dp"
+        android:id="@+id/text_original_price"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="2"
-        app:layout_constraintEnd_toStartOf="@+id/btn_delete_item"
-        app:layout_constraintStart_toStartOf="@+id/edt_quantity"
-        app:layout_constraintTop_toBottomOf="@+id/edt_quantity"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/text_title"
+        app:layout_constraintTop_toBottomOf="@+id/text_title"
         tools:text="69.000đ" />
 
-    <ImageView
+    <TextView
+        android:id="@+id/text_price"
+        style="@style/TextRed20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/text_original_price"
+        app:layout_constraintStart_toEndOf="@+id/text_original_price"
+        app:layout_constraintTop_toTopOf="@+id/text_original_price"
+        tools:text="69.000đ" />
+
+    <View
         android:id="@+id/imv_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -53,26 +61,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img_book" />
 
-    <EditText
+    <ImageButton
+        android:id="@+id/btn_decrease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_round_remove_24"
+
+        app:layout_constraintStart_toStartOf="@id/text_title"
+        app:layout_constraintTop_toBottomOf="@id/text_price"
+        app:tint="@color/gray" />
+
+    <TextView
         android:id="@+id/edt_quantity"
-        android:layout_width="68dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/text_title"
-        app:layout_constraintTop_toBottomOf="@+id/text_title" />
+        style="@style/TextBlack18"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:nextFocusDown="@id/btn_remove"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_decrease"
+        app:layout_constraintStart_toEndOf="@+id/btn_decrease"
+        app:layout_constraintTop_toTopOf="@+id/btn_decrease"
+        tools:text="7" />
 
+    <ImageButton
+        android:id="@+id/btn_increase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_round_add_24"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_quantity"
+        app:layout_constraintStart_toEndOf="@+id/edt_quantity"
+        app:layout_constraintTop_toTopOf="@+id/edt_quantity"
+        app:tint="@color/gray" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/btn_delete_item"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:backgroundTint="@color/important_button_color"
-        android:textColor="@color/white"
-        app:icon="@drawable/ic_round_close_24"
-        app:iconTint="@color/white"
+        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_round_close_24"
+        tools:ignore="ContentDescription" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@
         <entry key="..\:/Semester7-FA21/PRM391/0-code/TheBookshop/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2601851851851852" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/bg_button_corner50.xml" value="0.2188034188034188" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/bg_button_corner_red.xml" value="0.2703125" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/bg_checkout_form.xml" value="0.2188034188034188" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/bg_corner_login_panel.xml" value="0.2703125" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/bg_corner_panel.xml" value="0.2188034188034188" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/bg_gradient_primary.xml" value="0.2703125" />
@@ -32,10 +33,10 @@
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/selector_type_sort_price.xml" value="0.22179487179487178" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/drawable/splash_background.xml" value="0.2703125" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_account.xml" value="0.264" />
-        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_book_detail.xml" value="0.264" />
-        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_cart.xml" value="0.6" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_book_detail.xml" value="0.487146529562982" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_cart.xml" value="0.4" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_change_password.xml" value="0.264" />
-        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_checkout.xml" value="0.4" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_checkout.xml" value="0.2" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_forgot_password.xml" value="0.264" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_list_book.xml" value="0.21795444394819116" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/activity_login.xml" value="0.264" />
@@ -49,6 +50,9 @@
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/item_book.xml" value="0.2" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/item_book_preview.xml" value="0.536" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/item_slider_banner.xml" value="0.19814814814814816" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/layout_quantity.xml" value="0.4" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/mini_cart_item.xml" value="0.20555555555555555" />
+        <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/mini_item_cart.xml" value="0.4" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/rating_layout.xml" value="0.264" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/row_item_cart.xml" value="0.4" />
         <entry key="..\:/Semester7-FA21/PRM391/3-project/the-bookshop/app/src/main/res/layout/side_navigation.xml" value="0.20854700854700856" />

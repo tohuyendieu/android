@@ -1,8 +1,11 @@
 package fptu.ninhtbm.thebookshop.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.Timestamp;
 
-public class BookSelected {
+public class BookSelected implements Parcelable {
     private String id;
     private Object bookID;
     private Object cartID;
@@ -26,6 +29,36 @@ public class BookSelected {
         this.quantity = quantity;
         this.createdAt = createdAt;
     }
+
+    protected BookSelected(Parcel in) {
+        id = in.readString();
+        quantity = in.readInt();
+        createdAt = in.readParcelable(Timestamp.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeInt(quantity);
+        dest.writeParcelable(createdAt, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<BookSelected> CREATOR = new Creator<BookSelected>() {
+        @Override
+        public BookSelected createFromParcel(Parcel in) {
+            return new BookSelected(in);
+        }
+
+        @Override
+        public BookSelected[] newArray(int size) {
+            return new BookSelected[size];
+        }
+    };
 
     public String getId() {
         return id;
