@@ -101,5 +101,7 @@
     <string name="txt_string_quantity">x%s</string>
     <string name="txt_not_enough_book_in_stock">Số lượng trong kho không đủ.</string>
     <string name="txt_checkout_success">Mua hàng thành công</string>
+    <string name="txt_search_not_found">Không tìm thấy thông tin sách tương ứng!</string>
+    <string name="txt_no_book">Trang bạn yêu cầu không có cuốn sách nào cả :(</string>
     <!--    <string name="txt_string_strikethrough">%s</string>-->
 </resources>

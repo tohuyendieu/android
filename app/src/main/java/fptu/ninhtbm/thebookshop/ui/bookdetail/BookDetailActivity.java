@@ -23,6 +23,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -211,7 +212,7 @@ public class BookDetailActivity extends AppCompatActivity implements IBookDetail
         mTextOriginalPrice.setPaintFlags(mTextOriginalPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         mRatingbar.setRating((float) mBook.getAvgRated());
         if (mBook.getAvgRated() > 0) {
-            mTextAvgRate.setText(String.valueOf(mBook.getAvgRated()));
+            mTextAvgRate.setText(new DecimalFormat("#0.0").format(mBook.getAvgRated()));
         } else {
             mTextAvgRate.setText(getString(R.string.txt_no_rate));
         }

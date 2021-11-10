@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     private static final int NUMBER_BOOK_IN_PREVIEW = 10;
 
+    private EditText mEdtSearch;
     private ImageButton mBtnMenu;
     private ImageButton mBtnCart;
     private ImageButton mBtnProfile;
@@ -88,6 +91,8 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     @SuppressLint({"UnsafeExperimentalUsageError", "ResourceAsColor"})
     private void initViews() {
+
+        mEdtSearch = findViewById(R.id.edt_search);
         mBtnMenu = findViewById(R.id.btn_menu);
         mBtnCart = findViewById(R.id.btn_cart);
         mBtnProfile = findViewById(R.id.btn_profile);
@@ -228,6 +233,16 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
                 intent = new Intent(this, LoginActivity.class);
             }
             startActivity(intent);
+        });
+        mEdtSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                String keyword = mEdtSearch.getText().toString().trim();
+                Intent intent = new Intent(MainActivity.this, ListBookActivity.class);
+                intent.putExtra(ListBookActivity.SEARCH_KEYWORD, keyword);
+                startActivity(intent);
+                return true;
+            }
+            return false;
         });
     }
 

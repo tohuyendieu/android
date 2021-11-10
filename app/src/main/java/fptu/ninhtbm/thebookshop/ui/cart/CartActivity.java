@@ -119,9 +119,11 @@ public class CartActivity extends AppCompatActivity implements ICartActivity {
         mProgressBar.setVisibility(View.INVISIBLE);
         if (mBookSelectedList.isEmpty()) {
             findViewById(R.id.text_cart_no_item).setVisibility(View.VISIBLE);
+            mBtnBuy.setEnabled(false);
             mRecyclerViewCart.setVisibility(View.INVISIBLE);
         } else {
             findViewById(R.id.text_cart_no_item).setVisibility(View.INVISIBLE);
+            mBtnBuy.setEnabled(true);
             mRecyclerViewCart.setVisibility(View.VISIBLE);
         }
     }

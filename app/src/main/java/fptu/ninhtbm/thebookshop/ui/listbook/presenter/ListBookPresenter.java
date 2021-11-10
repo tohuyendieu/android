@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -38,10 +39,44 @@ public class ListBookPresenter extends BasePresenter<IListBookActivity> implemen
                             }
                             mActivity.loadBooks(bookList);
                         } else {
-                            mActivity.popSnackbarNotification(R.string.txt_book_not_found_by_category);
+                            mActivity.loadBooks(null);
                         }
                     } else {
                         mActivity.popSnackbarNotification(R.string.txt_noti_loading_failure);
+                    }
+                });
+    }
+
+    @Override
+    public void searchBooksByTitle(String keyword) {
+        db.collection("Book")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            List<Book> allBook = new ArrayList<>();
+                            List<Book> searchBooks = new ArrayList<>();
+
+                            if(task.getResult().getDocuments().size() > 0) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Book book = document.toObject(Book.class);
+                                    book.setId(document.getId());
+                                    allBook.add(book);
+                                }
+                                for (int i = 0; i < allBook.size(); i++) {
+                                    if(allBook.get(i).getTitle().toLowerCase().contains(keyword.toLowerCase())){
+                                        searchBooks.add(allBook.get(i));
+                                    }
+                                }
+//                                Log.d(TAG, "Kết quả tìm kiếm với \""+ keyword + "\": ");
+                                mActivity.loadBooks(searchBooks);
+                            } else {
+                                mActivity.loadBooks(searchBooks);
+                            }
+                        } else {
+                            mActivity.popSnackbarNotification(R.string.txt_noti_loading_failure);
+                        }
                     }
                 });
     }

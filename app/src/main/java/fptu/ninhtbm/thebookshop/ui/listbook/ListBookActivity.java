@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -33,6 +35,7 @@ import fptu.ninhtbm.thebookshop.ui.login.LoginActivity;
 
 public class ListBookActivity extends AppCompatActivity implements IListBookActivity {
     public static final String CATEGORY_KEY = "CATEGORY_KEY";
+    public static final String SEARCH_KEYWORD = "SEARCH_KEYWORD";
 
     private static final int ORDER_BY_RATE = 1;
     private static final int ORDER_BY_DATE = 2;
@@ -40,6 +43,7 @@ public class ListBookActivity extends AppCompatActivity implements IListBookActi
     private static final int ORDER_BY_PRICE = 4;
 
 
+    private EditText mEdtSearch;
     private ImageButton mBtnBack;
     private ImageButton mBtnCart;
     private ImageButton mBtnProfile;
@@ -76,6 +80,7 @@ public class ListBookActivity extends AppCompatActivity implements IListBookActi
     private void initViews() {
         mPresenter = new ListBookPresenter(this);
 
+        mEdtSearch = findViewById(R.id.edt_search);
         mBtnBack = findViewById(R.id.btn_menu);
         mBtnBack.setImageResource(R.drawable.ic_round_arrow_back_40);
         mBtnCart = findViewById(R.id.btn_cart);
@@ -98,6 +103,16 @@ public class ListBookActivity extends AppCompatActivity implements IListBookActi
     }
 
     private void setListener() {
+        mEdtSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                String keyword = mEdtSearch.getText().toString().trim();
+                Intent intent = new Intent(ListBookActivity.this, ListBookActivity.class);
+                intent.putExtra(ListBookActivity.SEARCH_KEYWORD, keyword);
+                startActivity(intent);
+                return true;
+            }
+            return false;
+        });
         mBtnBack.setOnClickListener(v -> finish());
         mBtnProfile.setOnClickListener(v -> {
             Intent intent;
@@ -129,6 +144,12 @@ public class ListBookActivity extends AppCompatActivity implements IListBookActi
         if (mCategory != null) {
             mProgressBar.setVisibility(View.VISIBLE);
             mPresenter.loadBookByCategoryId(mCategory.getId());
+        } else {
+            String keyword = getIntent().getStringExtra(SEARCH_KEYWORD);
+            if (keyword == null) return;
+            mEdtSearch.setHint("Tìm kiếm cho " + keyword);
+            mProgressBar.setVisibility(View.VISIBLE);
+            mPresenter.searchBooksByTitle(keyword);
         }
 
     }
@@ -204,10 +225,20 @@ public class ListBookActivity extends AppCompatActivity implements IListBookActi
                 mBookList.sort(Comparator.comparing(Book::getId));
                 break;
         }
-        mBtnSortByDate.setTextColor(isSortingDate ? getColor(R.color.important_button_color): getColor(android.R.color.tab_indicator_text));
-        mBtnSortByRate.setTextColor(isSortingRate ? getColor(R.color.important_button_color): getColor(android.R.color.tab_indicator_text));
-        mBtnSortBySale.setTextColor(isSortingSale ? getColor(R.color.important_button_color): getColor(android.R.color.tab_indicator_text));
-        mBtnSortByPrice.setTextColor(isSortingPrice ? getColor(R.color.important_button_color): getColor(android.R.color.tab_indicator_text));
+        mBtnSortByDate.setTextColor(isSortingDate ? getColor(R.color.important_button_color) : getColor(android.R.color.tab_indicator_text));
+        mBtnSortByRate.setTextColor(isSortingRate ? getColor(R.color.important_button_color) : getColor(android.R.color.tab_indicator_text));
+        mBtnSortBySale.setTextColor(isSortingSale ? getColor(R.color.important_button_color) : getColor(android.R.color.tab_indicator_text));
+        mBtnSortByPrice.setTextColor(isSortingPrice && isLowPrice ? getColor(R.color.important_button_color) : getColor(android.R.color.tab_indicator_text));
+        if(!isSortingPrice && !isLowPrice){
+            mBtnSortByPrice.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_arrow_drop_up_24, 0);
+            mBtnSortByPrice.setTextColor(getColor(R.color.important_button_color));
+        } else if (isSortingPrice && isLowPrice){
+            mBtnSortByPrice.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_arrow_drop_down_24, 0);
+            mBtnSortByPrice.setTextColor(getColor(R.color.important_button_color));
+        } else {
+            mBtnSortByPrice.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+            mBtnSortByPrice.setTextColor(getColor(android.R.color.tab_indicator_text));
+        }
         mBookAdapter.notifyDataSetChanged();
         mProgressBar.setVisibility(View.INVISIBLE);
     }
@@ -220,8 +251,10 @@ public class ListBookActivity extends AppCompatActivity implements IListBookActi
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void loadBooks(List<Book> bookList) {
-        if (bookList == null) {
-            popSnackbarNotification(R.string.txt_book_not_found_by_category);
+        if (bookList == null || bookList.isEmpty()) {
+            findViewById(R.id.text_no_book).setVisibility(View.VISIBLE);
+            mRecyclerViewBook.setVisibility(View.INVISIBLE);
+            mProgressBar.setVisibility(View.INVISIBLE);
             return;
         }
         mBookList.clear();
@@ -229,4 +262,5 @@ public class ListBookActivity extends AppCompatActivity implements IListBookActi
         mBookAdapter.notifyDataSetChanged();
         mProgressBar.setVisibility(View.INVISIBLE);
     }
+
 }
