@@ -19,6 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@android:color/transparent"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
             android:src="@drawable/ic_baseline_menu_40"
             app:layout_constraintBottom_toBottomOf="@+id/edt_search"
             app:layout_constraintEnd_toStartOf="@id/edt_search"
@@ -40,22 +42,61 @@
             android:paddingStart="8dp"
             android:paddingEnd="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_cart"
+            app:layout_constraintEnd_toStartOf="@id/cart_layout"
             app:layout_constraintStart_toEndOf="@id/btn_menu"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btn_cart"
+        <FrameLayout
+            android:id="@+id/cart_layout"
+            style="?attr/actionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_cart"
+            android:clipToPadding="false"
+            android:focusable="true"
             app:layout_constraintBottom_toBottomOf="@+id/edt_search"
             app:layout_constraintEnd_toStartOf="@id/btn_profile"
             app:layout_constraintStart_toEndOf="@id/edt_search"
-            app:layout_constraintTop_toTopOf="@+id/edt_search"
-            tools:ignore="ContentDescription" />
+            app:layout_constraintTop_toTopOf="@+id/edt_search">
+
+            <ImageButton
+                android:id="@+id/btn_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:src="@drawable/ic_cart"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/cart_badge"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right|end|top"
+                android:layout_marginTop="3dp"
+                android:visibility="gone"
+                android:layout_marginEnd="-5dp"
+                android:layout_marginRight="-5dp"
+                android:background="@drawable/bg_badge"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@android:color/white"
+                android:textSize="10sp" />
+
+        </FrameLayout>
+        <!--        <ImageButton-->
+        <!--            android:id="@+id/btn_cart"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginEnd="8dp"-->
+        <!--            android:background="@android:color/transparent"-->
+        <!--            android:src="@drawable/ic_cart"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/edt_search"-->
+        <!--            app:layout_constraintEnd_toStartOf="@id/btn_profile"-->
+        <!--            app:layout_constraintStart_toEndOf="@id/edt_search"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/edt_search"-->
+        <!--            tools:ignore="ContentDescription" />-->
 
         <ImageButton
             android:id="@+id/btn_profile"
@@ -63,12 +104,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:background="@android:color/transparent"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
             android:src="@drawable/ic_baseline_account_circle_40"
             app:layout_constraintBottom_toBottomOf="@+id/edt_search"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_cart"
+            app:layout_constraintStart_toEndOf="@id/cart_layout"
             app:layout_constraintTop_toTopOf="@+id/edt_search"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.appbar.AppBarLayout>

@@ -43,6 +43,7 @@ public class BookOrderedAdapter extends RecyclerView.Adapter<BookOrderedAdapter.
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.setIsRecyclable(false);
         BookSelected bookSelected = mBookSelectedList.get(position);
         if (bookSelected == null) return;
         Book book = (Book) bookSelected.getBookID();

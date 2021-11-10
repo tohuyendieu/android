@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">The Bookshop</string>
-    <string name="text_search_hint">Search cái gì đó đi</string>
+    <string name="text_search_hint">Tìm kiếm...</string>
     <string name="text_account">Tài khoản</string>
     <string name="text_password">Mật khẩu</string>
     <string name="text_old_password">Mật khẩu cũ</string>

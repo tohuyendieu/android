@@ -40,6 +40,7 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (mBookList == null || mBookList.get(position) == null)
             return;
+        holder.setIsRecyclable(false);
         Book book = mBookList.get(position);
         Glide.with(mContext)
                 .load(book.getBookCoverImg())

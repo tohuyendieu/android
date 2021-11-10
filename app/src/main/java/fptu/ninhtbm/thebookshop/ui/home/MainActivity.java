@@ -2,7 +2,6 @@ package fptu.ninhtbm.thebookshop.ui.home;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,8 +19,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.badge.BadgeDrawable;
-import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.smarteist.autoimageslider.SliderView;
@@ -53,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
     private ImageButton mBtnMenu;
     private ImageButton mBtnCart;
     private ImageButton mBtnProfile;
-    private BadgeDrawable badgeDrawable;
+    private TextView mCartBadge;
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -96,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         mBtnMenu = findViewById(R.id.btn_menu);
         mBtnCart = findViewById(R.id.btn_cart);
         mBtnProfile = findViewById(R.id.btn_profile);
+        mCartBadge = findViewById(R.id.cart_badge);
         mSliderView = findViewById(R.id.slider_banner);
         mBestSaleBookRecyclerView = findViewById(R.id.rc_book_best_sale);
         mNewBookRecyclerView = findViewById(R.id.rc_book_top_new);
@@ -105,11 +103,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         mNavigationView = findViewById(R.id.navigation_view);
 
         mPresenter = new MainPresenter(this);
-        badgeDrawable = BadgeDrawable.create(this);
-        badgeDrawable.setBadgeGravity(BadgeDrawable.TOP_END);
-        badgeDrawable.setBackgroundColor(R.color.important_button_color);
-        badgeDrawable.setBadgeTextColor(Color.WHITE);
-        BadgeUtils.attachBadgeDrawable(badgeDrawable, mBtnCart);
 
         setUpAutoSlidingBanner();
 
@@ -253,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         setUpNavigationDrawer();
     }
 
-    private void setUpNavigationDrawer(){
+    private void setUpNavigationDrawer() {
         View headerNavigationView = mNavigationView.getHeaderView(0);
         TextView labelLogin = headerNavigationView.findViewById(R.id.label_login_nav_bar);
         MaterialButton btnLogin = headerNavigationView.findViewById(R.id.btn_login_nav_bar);
@@ -271,6 +264,18 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
             textGreeting.setVisibility(View.GONE);
             itemLogout.setVisible(false);
         }
+        if (mCustomer != null) {
+            WidgetUtils.getNumberItemInCart(mCustomer.getId(), number -> {
+                if (number > 0) {
+                    mCartBadge.setText(String.valueOf(number));
+                    mCartBadge.setVisibility(View.VISIBLE);
+                } else {
+                    mCartBadge.setVisibility(View.GONE);
+                }
+            });
+        } else {
+            mCartBadge.setVisibility(View.GONE);
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -282,9 +287,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         mPresenter.loadTopBookByField(NUMBER_BOOK_IN_PREVIEW, Constants.TYPE_SORT_NEW);
         mPresenter.loadTopBookByField(NUMBER_BOOK_IN_PREVIEW, Constants.TYPE_SORT_RATE);
         mPresenter.loadTopBookByField(NUMBER_BOOK_IN_PREVIEW, Constants.TYPE_SORT_SALE_OFF);
-        // Todo: fake number badge in cart
-        badgeDrawable.setVisible(true);
-        badgeDrawable.setNumber(9);
+
         mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/mobile_images/158/original/Winter_Recipes_-_640x180.jpg");
         mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/157/original/StrangerInTheLifeboat_2048x600_rev2_%281%29.jpg");
         mSliderBannerAdapter.notifyDataSetChanged();

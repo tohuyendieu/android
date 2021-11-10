@@ -47,6 +47,7 @@ public class ListBookActivity extends AppCompatActivity implements IListBookActi
     private ImageButton mBtnBack;
     private ImageButton mBtnCart;
     private ImageButton mBtnProfile;
+    private TextView mCartBadge;
     private TextView mBtnSortByRate;
     private TextView mBtnSortByDate;
     private TextView mBtnSortBySale;
@@ -85,6 +86,7 @@ public class ListBookActivity extends AppCompatActivity implements IListBookActi
         mBtnBack.setImageResource(R.drawable.ic_round_arrow_back_40);
         mBtnCart = findViewById(R.id.btn_cart);
         mBtnProfile = findViewById(R.id.btn_profile);
+        mCartBadge = findViewById(R.id.cart_badge);
         mBtnSortByRate = findViewById(R.id.order_rate);
         mBtnSortByDate = findViewById(R.id.order_date);
         mBtnSortBySale = findViewById(R.id.order_sale);
@@ -229,10 +231,10 @@ public class ListBookActivity extends AppCompatActivity implements IListBookActi
         mBtnSortByRate.setTextColor(isSortingRate ? getColor(R.color.important_button_color) : getColor(android.R.color.tab_indicator_text));
         mBtnSortBySale.setTextColor(isSortingSale ? getColor(R.color.important_button_color) : getColor(android.R.color.tab_indicator_text));
         mBtnSortByPrice.setTextColor(isSortingPrice && isLowPrice ? getColor(R.color.important_button_color) : getColor(android.R.color.tab_indicator_text));
-        if(!isSortingPrice && !isLowPrice){
+        if (!isSortingPrice && !isLowPrice) {
             mBtnSortByPrice.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_arrow_drop_up_24, 0);
             mBtnSortByPrice.setTextColor(getColor(R.color.important_button_color));
-        } else if (isSortingPrice && isLowPrice){
+        } else if (isSortingPrice && isLowPrice) {
             mBtnSortByPrice.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_arrow_drop_down_24, 0);
             mBtnSortByPrice.setTextColor(getColor(R.color.important_button_color));
         } else {
@@ -261,6 +263,18 @@ public class ListBookActivity extends AppCompatActivity implements IListBookActi
         mBookList.addAll(bookList);
         mBookAdapter.notifyDataSetChanged();
         mProgressBar.setVisibility(View.INVISIBLE);
+        if (mCustomer != null) {
+            WidgetUtils.getNumberItemInCart(mCustomer.getId(), number -> {
+                if (number > 0) {
+                    mCartBadge.setText(String.valueOf(number));
+                    mCartBadge.setVisibility(View.VISIBLE);
+                } else {
+                    mCartBadge.setVisibility(View.GONE);
+                }
+            });
+        } else {
+            mCartBadge.setVisibility(View.GONE);
+        }
     }
 
 }
