@@ -288,8 +288,8 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         mPresenter.loadTopBookByField(NUMBER_BOOK_IN_PREVIEW, Constants.TYPE_SORT_RATE);
         mPresenter.loadTopBookByField(NUMBER_BOOK_IN_PREVIEW, Constants.TYPE_SORT_SALE_OFF);
 
-        mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/mobile_images/158/original/Winter_Recipes_-_640x180.jpg");
-        mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/157/original/StrangerInTheLifeboat_2048x600_rev2_%281%29.jpg");
+        mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/158/original/Belonging_TH_2048x600_%281%29.jpg");
+        mImageList.add("https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/157/original/Oluo-Mediocre-BOOKSHOP-2048x600-rev1_%281%29.jpg");
         mSliderBannerAdapter.notifyDataSetChanged();
     }
 
