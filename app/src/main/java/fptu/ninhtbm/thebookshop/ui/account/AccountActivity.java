@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -31,6 +32,7 @@ import fptu.ninhtbm.thebookshop.library.Validates;
 import fptu.ninhtbm.thebookshop.library.WidgetUtils;
 import fptu.ninhtbm.thebookshop.model.Account;
 import fptu.ninhtbm.thebookshop.model.Customer;
+import fptu.ninhtbm.thebookshop.ui.base.AboutAppActivity;
 import fptu.ninhtbm.thebookshop.ui.changepassword.ChangePasswordActivity;
 import fptu.ninhtbm.thebookshop.ui.login.LoginActivity;
 
@@ -59,6 +61,8 @@ public class AccountActivity extends AppCompatActivity {
     private EditText mEdtAddress;
     private TextView mBtnChangePassword;
     private TextView mBtnLogout;
+    private TextView mBtnHistory;
+    private TextView mBtnAboutApp;
     private boolean isEditing;
     private LinearProgressIndicator mProgressBar;
 
@@ -101,6 +105,8 @@ public class AccountActivity extends AppCompatActivity {
         mEdtAddress = findViewById(R.id.edt_address);
         mBtnChangePassword = findViewById(R.id.btn_change_password);
         mBtnLogout = findViewById(R.id.btn_logout);
+        mBtnHistory = findViewById(R.id.btn_history);
+        mBtnAboutApp = findViewById(R.id.btn_about_app);
         mTextTitle.setText(getString(R.string.txt_account_info));
         mProgressBar = findViewById(R.id.progress_bar);
     }
@@ -118,6 +124,11 @@ public class AccountActivity extends AppCompatActivity {
         mBtnChangePassword.setOnClickListener(v -> {
             Intent intent = new Intent(this, ChangePasswordActivity.class);
             changePasswordResultLauncher.launch(intent);
+        });
+        mBtnHistory.setOnClickListener(v -> Toast.makeText(this, "Chức năng này hiện chưa có sẵn", Toast.LENGTH_SHORT).show());
+        mBtnAboutApp.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AboutAppActivity.class);
+            startActivity(intent);
         });
 
     }
